@@ -1,0 +1,93 @@
+body {
+	margin: 0;
+	padding: 0;
+}
+
+main {
+	width: 80%;
+	height: auto;
+	margin: 0 auto;
+	margin-top: 10px;
+	background-color: cyan;
+	display: flex;
+	justify-content: space-between;
+	padding-top: 10px;
+	padding-right: 10px;
+	padding-left: 10px;
+	flex-direction: column;
+}
+
+.quadrada {
+	width: 100px;
+	height: 100px;
+	border: 5px solid #000;
+	margin: 5px;
+	background: tomato;
+	color: #fff;
+	font-family: verdana, arial, cursive;
+	font-weight: bold;
+	font-size: 50px;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+
+.ajuste-margem{
+	margin-top: 10px;
+}
+
+.estante {
+	display: flex;
+	width: 100%;
+	height: auto;
+	background: #880e4f;
+	justify-content: space-around;
+}
+
+.circulo {
+	width: 100px;
+	height: 100px;
+	background: #015793;
+	border-radius: 100%;
+	border: 5px solid #000;
+	margin: 10px;
+	color: #fff;
+	font-family: verdana, arial, cursive;
+	font-weight: bold;
+	font-size: 50px;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+
+.center {
+	justify-content: center;
+	align-items: center;
+}
+
+.zelda {
+	display: flex;
+	width: 100%;
+	height: auto;
+	margin-top: 15px;
+	margin-bottom: 15px;
+	justify-content: space-around;
+}
+
+.voltar {
+	padding: 15px;
+	border: 5px solid black;
+	width: 100px;
+	height: auto;
+	background-color: #99c211;
+	color: #fff;
+	text-decoration: none;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+
+.voltar:hover {
+	background-color: #014791;
+	text-decoration: underline;
+}

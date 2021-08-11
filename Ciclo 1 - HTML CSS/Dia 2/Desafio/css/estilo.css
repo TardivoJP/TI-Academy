@@ -1,0 +1,72 @@
+body {
+	margin: 0;
+	padding: 0;
+}
+
+.plano {
+	width: 75vh;
+	height: auto;
+	background-color: #ffaf19;
+	margin: 0 auto;
+	margin-top: 15vh;
+	display: flex;
+	flex-direction: column;
+}
+
+.quadrilatero {
+	width: 20vh;
+	height: 20vh;
+	border: 10px solid #000;
+	background-color: #2aafe8;
+	display: flex;
+	align-self: flex-start;
+	margin: 5%;
+	justify-content: center;
+	align-items: center;
+	font-family: verdana, arial, cursive;
+	color: #fff;
+	font-size: 35px;
+	text-decoration: none;
+	text-shadow: 2px 0 0 #000, -2px 0 0 #000, 0 2px 0 #000, 0 -2px 0 #000, 1px 1px #000, -1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000;
+
+}
+
+.quadrilatero:hover {
+	cursor: pointer;
+	background-color: #0613c9;
+	color: #000;
+	text-shadow: 2px 0 0 #fff, -2px 0 0 #fff, 0 2px 0 #fff, 0 -2px 0 #fff, 1px 1px #fff, -1px -1px 0 #fff, 1px -1px 0 #fff, -1px 1px 0 #fff;
+}
+
+.circular {
+	width: 20vh;
+	height: 20vh;
+	border: 10px solid #000;
+	border-radius: 100%;
+	background-color: #52eb5f;
+	display: flex;
+	align-self: flex-end;
+	margin: 5%;
+	justify-content: center;
+	align-items: center;
+	font-family: verdana, arial, cursive;
+	color: #fff;
+	font-size: 35px;
+	text-decoration: none;
+	text-shadow: 2px 0 0 #000, -2px 0 0 #000, 0 2px 0 #000, 0 -2px 0 #000, 1px 1px #000, -1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000;
+}
+
+.circular:hover {
+	cursor: pointer;
+	background-color: #249100;
+	color: #000;
+	text-shadow: 2px 0 0 #fff, -2px 0 0 #fff, 0 2px 0 #fff, 0 -2px 0 #fff, 1px 1px #fff, -1px -1px 0 #fff, 1px -1px 0 #fff, -1px 1px 0 #fff;
+}
+
+.inverte1 {
+	align-self: flex-end;
+}
+
+.inverte2 {
+	align-self: flex-start;
+}
