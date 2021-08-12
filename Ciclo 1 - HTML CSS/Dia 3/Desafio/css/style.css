@@ -1,0 +1,193 @@
+	html, body, main, ul {
+		width: 100%;
+		height: 100%;
+		margin: 0;
+	}
+
+	header, footer {
+		width: 100%;
+		height: 10%;
+		background: #000;
+		position: fixed;
+		display: flex;
+		justify-content: center;
+	}
+
+	footer {
+		bottom: 0;
+	}
+
+	main {
+		padding: 0;
+		display: flex;
+		justify-content: center;
+		align-items: center;
+	}
+
+	div {
+		height: 100%;
+	}
+
+	ul {
+		width: 70%;
+		height: 100%;
+		display: flex;
+		justify-content: flex-end;
+		align-items: center;
+		list-style: none;
+	}
+
+	li {
+		margin-right: 5%;
+		font-size: 2.5vmin;
+	}
+
+	a {
+		text-decoration: none;
+		color: #fff;
+	}
+
+	.cfg-texto-hdr{
+		font-family: verdana, arial, cursive;
+		color: #fff;
+	}
+
+	.logo{
+		margin-right: 52.15%;
+		font-family: "eurostiletbla", "bookman old style", "cooperplate gothic bold", arial, cursive;
+		font-size: 2.95vmin;
+	}
+
+	.home{
+		width: 12%;
+		height: 40%;
+		border-radius: 20px;
+		background: #ffa305;
+		display: flex;
+		align-items: center;
+		justify-content: center;
+	}
+
+	.home-botao{
+		width: 100%;
+		height: 100%;
+		border-radius: 20px;
+		display: flex;
+		align-items: center;
+		justify-content: center;
+	}
+
+	.footer{
+		width: 70%;
+		height: 100%;
+		position: absolute;
+		bottom: -40%;
+		display: flex;
+		justify-content: center;
+		align-items: center;
+		font-weight: bold;
+		font-size: 4vmin;
+	}
+
+	.cfg-texto-pg{
+		text-align: justify;
+		font-family: verdana, arial, cursive;
+		font-size: 1.9vmin;
+		color: #000;
+	}
+
+	.quadrado-lorem{
+		width: 18%;
+		height: auto;
+		padding: 1%;
+		background: #fafae3;
+		border-radius: 8%;
+		display: flex;
+		align-items: center;
+		justify-content: center;
+	}
+
+
+	.l-pontilhada{
+		border-left: 5px dotted #000;
+		margin: 1%;
+		height: 30%;
+	}
+
+
+	.form-email{
+		width: 18%;
+		height: 18%;
+		display: flex;
+		flex-direction: column;
+		align-items: center;
+	}
+
+	.caixa-email{
+		width: 70%;
+		height: 20%;
+	}
+
+	.botao-estilizado{
+		width: 40%;
+		height: 20%;
+		border: 2px solid #000;
+		border-radius: 15px;
+		background-color: #ffe600;
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		margin-top: 7%;
+	}
+
+	.botao-estilizado:hover{
+		cursor: pointer;
+		background-color: #a89700;
+		color: #fff;
+	}
+
+	.botao-link{
+		width: 100%;
+		height: 100%;
+		border-radius: 15px;
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		color: #000;
+	}
+
+	.botao-link:hover{
+		cursor: pointer;
+		color: #fff;
+	}
+
+	.quadrado-lorem-sobre{
+		width: 40%;
+		height: auto;
+		padding: 1%;
+		background: #fafae3;
+		border-radius: 8%;
+		display: flex;
+		align-items: center;
+		justify-content: center;
+	}
+
+	.main-coluna{
+		flex-direction: column;
+	}
+
+	.retang-titulo{
+		width: 45%;
+		height: auto;
+		padding: 1%;
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		font-size: 3.5vmin;
+		font-weight: bold;
+	}
+
+	.ajuste-margem{
+		margin-bottom: 1.5%;
+		border-radius: 5%;
+	}
