@@ -1,90 +1,116 @@
-*{
-	margin: 0;
-	padding: 0;
-	box-sizing: border-box;
-}
+	*{
+		margin: 0;
+	}
 
-body, main{
-	width: 100vw;
-	height: 100vh;
-	display: flex;
-}
+	html, body{
+		width: 100vw;
+		height: 100vh;
+		background: cyan;
+	}
 
-main{
-	background: cyan;
-	flex-direction: column;
-	align-items: center;
-	justify-content: center;
-	overflow: auto;
-}
+	header{
+		width: 100%;
+		height: 10%;
+		top: 0;
+		position: absolute;
+		overflow: hidden;
+		background: tomato;
+		border-bottom: 5px solid #000;
+	}
 
-header, footer{
-	width: 100%;
-	height: 6%;
-	background: tomato;
-	position: fixed;
-	display: flex;
-	justify-content: center;
-}
-
-header{
-	top: 0;
-	border-bottom: 1vh solid black;
-}
-
-footer{
-	bottom: 0;
-	border-top: 1vh solid black;
-}
-
-.estante{
-	width: 80%;
-	height: auto;
-	display: flex;
-	flex-direction: row;
-	justify-content: center;
-	align-items: center;
-}
-
-.content{
-	width: auto;
-	height: auto;
-	margin: 1%;
-	text-align: justify;
-}
-
-#estante-flutuante{
-	width: 80%;
-	height: auto;
-	display: flex;
-	flex-direction: row;
-	justify-content: flex-end;
-	align-items: center;
-}
-
-#quadrado-flutuante{
-	width: 100px;
-	height: 100px;
-	background: purple;
-	position: fixed;
-	bottom: 8vh;
-	margin-right: 0.8%;
-	display: flex;
-	text-align: center;
-	justify-content: center;
-	align-items: center;
-	font-family: verdana, arial, cursive;
-	font-size: 15px;
-	color: white;
-	text-shadow: 2px 0 0 #000, -2px 0 0 #000, 0 2px 0 #000, 0 -2px 0 #000, 1px 1px #000, -1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000;
-}
-
-@media screen and (max-width: 700px) {
-	.estante{
+	main{
+		width: 100%;
+		height: 80%;
+		position: absolute;
+		top: 10%;
+		bottom: 10%;
+		display: flex;
 		flex-direction: column;
+		overflow: auto;
 	}
 
-	#estante-flutuante{
-		display: none;
+	footer{
+		width: 100%;
+		height: 10%;
+		bottom: 0;
+		position: absolute;
+		background: tomato;
+		border-top: 5px solid #000;	
 	}
-}
+
+	p{
+		margin: 0.8%;
+		text-align: justify;
+	}
+
+	.estante{
+		width: 65%;
+		height: auto;
+		display: flex;
+		margin: auto;
+	}
+
+	#quadrado-flutuante{
+		width: 100px;
+		height: 100px;
+		border: 2px solid black;
+		background: purple;
+		position: fixed;
+		bottom: 15%;
+		right: 18%;
+		display: flex;
+		text-align: center;
+		justify-content: center;
+		align-items: center;
+		font-family: verdana, arial, cursive;
+		font-size: 15px;
+		color: white;
+		text-shadow: 2px 0 0 #000, -2px 0 0 #000, 0 2px 0 #000, 0 -2px 0 #000, 1px 1px #000, -1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000;
+	}
+
+	.estante-botoes{
+		width: 55%;
+		height: 70%;
+		position: relative;
+		top: 15%;
+		display: flex;
+		margin: auto;
+	}
+
+	.botao{
+		width: 35%;
+		margin: auto;
+		border: 1px solid #000;
+		border-radius: 15px;
+		display: flex;
+		justify-content: center;
+		align-items: center;
+		background: purple;
+		text-decoration: none;
+		color: #000;
+		font-family: verdana, arial, cursive;
+		font-size: 25px;
+	}
+
+	.botao:hover{
+		background: green;
+		color: #fff;
+	}
+
+	@media screen and (max-width: 700px){
+		p{
+			padding: 1%;
+		}
+
+		.estante{
+			flex-direction: column;
+		}
+
+		#quadrado-flutuante{
+			display: none;
+		}
+
+		.estante-botoes{
+			display: none;
+		}
+	}
