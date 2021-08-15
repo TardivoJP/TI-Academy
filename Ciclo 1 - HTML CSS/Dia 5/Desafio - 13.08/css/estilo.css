@@ -6,7 +6,7 @@
 
 html, body {
   width: 100%;
-  height: 100%;
+  height: 100vh;
 }
 
 header {
@@ -133,10 +133,21 @@ main {
 }
 
 #estante-header{
-  width: 70%;
+  width: 100%;
   height: 100px;
-  position: relative;
-  margin: auto;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+}
+
+#sub-estante-header{
+  width: 400px;
+  margin-right: 8.5%;
+  height: 100px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
 }
 
 #subtitulo{
@@ -144,8 +155,8 @@ main {
   font-size: 20px;
   text-shadow: 2px 0 0 #000, -2px 0 0 #000, 0 2px 0 #000, 0 -2px 0 #000, 1px 1px #000, -1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000;
   color: #fff;
-  margin-top: 1%;
-  margin-left: 12%;
+  margin-right: 50%;
+  margin-bottom: 2%;
 }
 
 #titulo-site{
@@ -153,19 +164,52 @@ main {
   font-size: 35px;
   text-shadow: 2px 0 0 #000, -2px 0 0 #000, 0 2px 0 #000, 0 -2px 0 #000, 1px 1px #000, -1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000;
   color: #fff;
-  margin-left: 17%;
+  margin-left: 5%;
 }
 
 #logo {
+  position: relative;
+}
+
+#logo-sidebar {
   position: absolute;
-  top: 18%;
-  right: 10%;
+  bottom: 0;
+  margin-bottom: 45%;
+  margin-left: 24%;
 }
 
 img {
   width: 50px;
   height: 50px;
 }
+
+#logo-sidebar > img {
+  width: 150px;
+  height: 150px;
+}
+
+#estante-sidebar {
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+  position: absolute;
+  bottom: 0;
+  font-family: 'Quicksand', sans-serif;
+  color: #818181;
+  margin-left: 16%;
+  margin-bottom: 15%;
+}
+
+#estante-sidebar:hover{
+  cursor: pointer;
+  color: #f1f1f1;
+}
+
+
+/* Responsividade em questão de largura, 
+   alguns elementos ficam menores e o conteúdo
+   principal fica disposto em forma de coluna
+   conforme ensinado em aula */
 
 @media screen and (max-width: 700px) {
   #logo{
@@ -183,6 +227,44 @@ img {
   
   .sub-container {
     margin-top: 3%;
+  }
+
+  #sub-estante-header {
+    width: 200px;
+  }
+
+  #subtitulo {
+    font-size: 10px;
+  }
+
+  #titulo-site {
+    font-size: 17px;
+  }
+
+  .openbtn {
+    font-size: 10px;
+    padding: 5px 7px;
+  }
+}
+
+/* Responsividade em questão de altura, 
+   com isso o site é funcional até em uma TV 4k
+   antes ficava um espaço branco depois do footer */
+
+@media screen and (min-height: 1250px) {
+  main {
+    padding-bottom: 220px;
+  }
+
+  .footer {
+    position: fixed;
+    bottom: 0;
+  }
+}
+
+@media screen and (min-height: 1620px) {
+  main {
+    padding-bottom: 600px;
   }
 }
 
@@ -230,8 +312,6 @@ img {
   padding: 10px 15px;
   border: none;
   border-radius: 25px;
-  margin-left: 10vw;
-  margin-top: 6%;
 }
 
 .openbtn:hover {
