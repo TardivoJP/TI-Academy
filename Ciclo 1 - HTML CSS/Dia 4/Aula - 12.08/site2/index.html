@@ -3,6 +3,7 @@
 <head>
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 	<link rel="stylesheet" type="text/css" href="site2.css">
 	<title>Projeto CEP</title>
 </head>
@@ -10,20 +11,36 @@
 	<header>
 			<h1>ME ACHA!</h1>
 			<h2>Encontre um endereço pelo número de CEP</h2>
+
+			<div id="content-base" class="flex justify-content">
+					<div id="logo-principal" class="flex justify-content">
+						<span class="material-icons logo">travel_explore</span>
+					</div>
+			</div>
 	</header>
 		<main>
-			<div id="conteudo-geral">
-				<div class="box-custom">
+			<div id="conteudo-geral" class="flex justify-content">
+				<div class="box-custom flex justify-content">
 					<form>
-						<input type="text" name="CEP" required>
-						<input type="text" name="Rua" readonly>
-						<input type="text" name="Bairro" readonly>
-						<input type="text" name="Cidade" readonly>
-						<input type="text" name="UF" readonly>
+						<label>CEP
+							<input type="text" name="CEP" required>
+						</label>
+						<label>Rua
+							<input type="text" name="Rua" readonly>
+						</label>
+						<label>Bairro
+							<input type="text" name="Bairro" readonly>
+						</label>
+						<label>Cidade
+							<input type="text" name="Cidade" readonly>
+						</label>
+						<label>UF
+							<input type="text" name="UF" readonly>
+						</label>
+						<div class="display-btn flex justify-content">
+							<input class="btn" type="button" value="Buscar" name="Buscar">
+						</div>
 					</form>
-					<div>
-						<a id="btn-buscar" href="">Buscar</a>
-					</div>
 				</div>
 			</div>
 		</main>
