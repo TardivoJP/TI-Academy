@@ -1,0 +1,244 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html, body {
+  width: 100%;
+  height: 100%;
+}
+
+header {
+  width: 100%;
+  height: 100px;
+  background: rgb(26,210,0);
+  background: linear-gradient(180deg, rgba(26,210,0,1) 0%, rgba(16,138,0,1) 82%);
+  border-bottom: 5px solid #000;
+  display: flex;
+}
+
+main {
+  width: 100%;
+  position: absolute;
+  background: rgb(187,187,187);
+  background: radial-gradient(circle, rgba(187,187,187,1) 53%, rgba(255,255,255,1) 100%);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+#container {
+  width: 85%;
+  background-color: yellow;
+  position: relative;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.head {
+  margin-top: 3%;
+  font-family: 'Merriweather', serif;
+  font-size: 40px;
+}
+
+#linha-divisoria {
+  width: 90%;
+  height: auto;
+  margin-top: 3%;
+  border-top: 2px dotted black;
+}
+
+
+.content {
+  width: 85%;
+  margin-top: 2%;
+  padding: 2%;
+  border-radius: 35px;
+  font-family: 'Rubik', sans-serif;
+  font-size: 15px;
+  text-align: justify;
+  background-color: rgba(9,228,1,0.21332282913165268);
+}
+
+.estante {
+  width: 95%;
+  margin-top: 2%;
+  height: auto;
+  display: flex;
+  flex: wrap;
+  justify-content: center;
+  text-align: center;
+}
+
+.sub-estante {
+  width: 235px;
+  margin-left: 1%;
+  margin-right: 1%;
+  border-radius: 35px;
+  background-color: rgba(9,228,1,0.21332282913165268);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.sub-container {
+  margin-left: 1%;
+  margin-right: 1%;
+  padding: 15px;
+  border-radius: 35px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background-color: rgba(9,228,1,0.21332282913165268);
+}
+
+.tira-cor {
+  background-color: rgba(9,228,1,0);
+}
+
+.titulo-no-grupo {
+  margin-bottom: 5px;
+  font-family: 'Fira Sans', sans-serif;
+  font-size: 15px;
+  font-weight: bold;
+}
+
+.titulo-abaixo {
+  margin-top: 30px;
+}
+
+
+.integrantes {
+  margin-top: 0.5%;
+  font-family: 'Rubik', sans-serif;
+  font-size: 15px;
+}
+
+.footer {
+  width: 100%;
+  height: 10vh;
+  margin-top: 3%;
+  font-family: 'Quicksand', sans-serif;
+  font-size: 20px;
+  text-shadow: 2px 0 0 #000, -2px 0 0 #000, 0 2px 0 #000, 0 -2px 0 #000, 1px 1px #000, -1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000;
+  color: #fff;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-top: 5px solid #000;
+  background: rgb(26,210,0);
+  background: linear-gradient(0deg, rgba(26,210,0,1) 0%, rgba(16,138,0,1) 82%);
+}
+
+#estante-header{
+  width: 70%;
+  height: 100px;
+  position: relative;
+  margin: auto;
+}
+
+#subtitulo{
+  font-family: 'Raleway', sans-serif;
+  font-size: 20px;
+  text-shadow: 2px 0 0 #000, -2px 0 0 #000, 0 2px 0 #000, 0 -2px 0 #000, 1px 1px #000, -1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000;
+  color: #fff;
+  margin-top: 1%;
+  margin-left: 12%;
+}
+
+#titulo-site{
+  font-family: 'Raleway', sans-serif;
+  font-size: 35px;
+  text-shadow: 2px 0 0 #000, -2px 0 0 #000, 0 2px 0 #000, 0 -2px 0 #000, 1px 1px #000, -1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000;
+  color: #fff;
+  margin-left: 17%;
+}
+
+#logo {
+  position: absolute;
+  top: 18%;
+  right: 10%;
+}
+
+img {
+  width: 50px;
+  height: 50px;
+}
+
+@media screen and (max-width: 700px) {
+  #logo{
+    display: none;
+  }
+
+  .estante{
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .sub-estante {
+    margin-top: 3%;
+  }
+  
+  .sub-container {
+    margin-top: 3%;
+  }
+}
+
+/* Menu sidebar com pequenas modificações da w3schools */
+
+.sidebar {
+  height: 100%;
+  width: 0;
+  position: fixed;
+  z-index: 1;
+  top: 0;
+  left: 0;
+  background-color: #111;
+  overflow-x: hidden;
+  padding-top: 60px;
+  transition: 0.5s;
+}
+
+.sidebar a {
+  padding: 8px 8px 8px 32px;
+  text-decoration: none;
+  font-size: 25px;
+  color: #818181;
+  display: block;
+  transition: 0.3s;
+}
+
+.sidebar a:hover {
+  color: #f1f1f1;
+}
+
+.sidebar .closebtn {
+  position: absolute;
+  top: 0;
+  right: 25px;
+  font-size: 36px;
+  margin-left: 50px;
+}
+
+.openbtn {
+  font-size: 20px;
+  cursor: pointer;
+  background-color: #111;
+  color: white;
+  padding: 10px 15px;
+  border: none;
+  border-radius: 25px;
+  margin-left: 10vw;
+  margin-top: 6%;
+}
+
+.openbtn:hover {
+  background-color: #444;
+}
+
+@media screen and (max-height: 450px) {
+  .sidebar {padding-top: 15px;}
+  .sidebar a {font-size: 18px;}
+}
