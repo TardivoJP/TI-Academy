@@ -18,17 +18,21 @@ var modulo = numeroVerdadeiro%n;
 var quadrado = Math.pow(numeroVerdadeiro, 2);
 
 document.write("1. Olá, <b>"+nome+"</b>!"+"<br>");
-document.write("2. Seu número é: <b>"+numeroVerdadeiro+"</b>."+"<br>");
 
-if(compara === true){
-	document.write("3. Seu número é igual a <b>n</b>!"+"<br>");
+if(numeroVerdadeiro !== numeroVerdadeiro){
+	document.write("2. Vamos com calma! A caixinha te pediu um número!<br>3. Aperte F5 e tente novamente!")
 }else{
-	document.write("3. Seu número é diferente de <b>n</b>!"+"<br>");
+	document.write("2. Seu número é: <b>"+numeroVerdadeiro+"</b>."+"<br>");
+
+	if(compara === true){
+		document.write("3. Seu número é igual a <b>n</b>!"+"<br>");
+	}else{
+		document.write("3. Seu número é diferente de <b>n</b>!"+"<br>");
+	}
+
+	document.write("4. O retorno da comparação booleana entre ele e <b>n</b> é: <b>"+compara+"</b>."+"<br>");
+	document.write("5. A soma dele e <b>n</b> é: <b>"+soma+"</b>."+"<br>");
+	document.write("6. A subtração dele e <b>n</b> é: <b>"+subtracao+"</b>."+"<br>");
+	document.write("7. O resto da divisão entre ele e <b>n</b> é: <b>"+modulo+"</b>."+"<br>");
+	document.write("8. O seu número elevado ao quadrado é: <b>"+quadrado+"</b>.");
 }
-
-document.write("4. O retorno da comparação booleana entre ele e <b>n</b> é: <b>"+compara+"</b>."+"<br>");
-document.write("5. A soma dele e <b>n</b> é: <b>"+soma+"</b>."+"<br>");
-document.write("6. A subtração dele e <b>n</b> é: <b>"+subtracao+"</b>."+"<br>");
-document.write("7. O resto da divisão entre ele e <b>n</b> é: <b>"+modulo+"</b>."+"<br>");
-document.write("8. O seu número elevado ao quadrado é: <b>"+quadrado+"</b>.");
-
