@@ -1,5 +1,5 @@
 
-var n = 15;
+var n = Math.floor(Math.random() * (100 - 0) + 0);
 
 var nome = prompt("Digite seu nome");
 
