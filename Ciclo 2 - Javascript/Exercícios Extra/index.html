@@ -3,22 +3,6 @@
 <head>
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<script type="text/javascript" src="lista1_ex1.js"></script>
-	<script type="text/javascript" src="lista1_ex2.js"></script>
-	<script type="text/javascript" src="lista1_ex3.js"></script>
-	<script type="text/javascript" src="lista1_ex4.js"></script>
-	<script type="text/javascript" src="lista1_ex5.js"></script>
-	<script type="text/javascript" src="lista1_ex6.js"></script>
-	<script type="text/javascript" src="lista1_ex7.js"></script>
-	<script type="text/javascript" src="lista1_ex8.js"></script>
-	<script type="text/javascript" src="lista1_ex9.js"></script>
-	<script type="text/javascript" src="lista1_ex10.js"></script>
-	<script type="text/javascript" src="lista1_ex11.js"></script>
-	<script type="text/javascript" src="lista1_ex12.js"></script>
-	<script type="text/javascript" src="lista1_ex13.js"></script>
-	<script type="text/javascript" src="lista1_ex14.js"></script>
-	<script type="text/javascript" src="lista1_ex15.js"></script>
-	<script type="text/javascript" src="lista1_ex16.js"></script>
 	<title>Teste Exercícios - Lista 1</title>
 </head>
 
@@ -40,10 +24,21 @@
 			justify-content: center;
 		}
 
-		#lista{
+		.lista{
 			width: 200px;
 			display: flex;
 			flex-direction: column;
+			margin-left: 15px;
+			margin-right: 15px;
+		}
+
+		.head_center{
+			margin-left: auto;
+			margin-right: auto;
+		}
+
+		#estante{
+			display: flex;
 		}
 	</style>
 
@@ -51,26 +46,68 @@
 
 <main>
 <h1>Clique nos botões para executar o código dos exercícos!</h1>
-<h3>Lista 1</h3>
-<div id="lista">
-	<input type="button" value="Exercicio 1" onclick="lst1_ex1()">
-	<input type="button" value="Exercicio 2" onclick="lst1_ex2()">
-	<input type="button" value="Exercicio 3" onclick="lst1_ex3()">
-	<input type="button" value="Exercicio 4" onclick="lst1_ex4()">
-	<input type="button" value="Exercicio 5" onclick="lst1_ex5()">
-	<input type="button" value="Exercicio 6" onclick="lst1_ex6()">
-	<input type="button" value="Exercicio 7" onclick="lst1_ex7()">
-	<input type="button" value="Exercicio 8" onclick="lst1_ex8()">
-	<input type="button" value="Exercicio 9" onclick="lst1_ex9()">
-	<input type="button" value="Exercicio 10" onclick="lst1_ex10()">
-	<input type="button" value="Exercicio 11" onclick="lst1_ex11()">
-	<input type="button" value="Exercicio 12" onclick="lst1_ex12()">
-	<input type="button" value="Exercicio 13" onclick="lst1_ex13()">
-	<input type="button" value="Exercicio 14" onclick="lst1_ex14()">
-	<input type="button" value="Exercicio 15" onclick="lst1_ex15()">
-	<input type="button" value="Exercicio 16" onclick="lst1_ex16()">
+
+
+<div id="estante">
+	<div class="lista">
+		<h3 class="head_center">Lista 1</h3>
+		<input type="button" value="Exercicio 1" onclick="lst1_ex1()">
+		<input type="button" value="Exercicio 2" onclick="lst1_ex2()">
+		<input type="button" value="Exercicio 3" onclick="lst1_ex3()">
+		<input type="button" value="Exercicio 4" onclick="lst1_ex4()">
+		<input type="button" value="Exercicio 5" onclick="lst1_ex5()">
+		<input type="button" value="Exercicio 6" onclick="lst1_ex6()">
+		<input type="button" value="Exercicio 7" onclick="lst1_ex7()">
+		<input type="button" value="Exercicio 8" onclick="lst1_ex8()">
+		<input type="button" value="Exercicio 9" onclick="lst1_ex9()">
+		<input type="button" value="Exercicio 10" onclick="lst1_ex10()">
+		<input type="button" value="Exercicio 11" onclick="lst1_ex11()">
+		<input type="button" value="Exercicio 12" onclick="lst1_ex12()">
+		<input type="button" value="Exercicio 13" onclick="lst1_ex13()">
+		<input type="button" value="Exercicio 14" onclick="lst1_ex14()">
+		<input type="button" value="Exercicio 15" onclick="lst1_ex15()">
+		<input type="button" value="Exercicio 16" onclick="lst1_ex16()">
+	</div>
+
+
+	<div class="lista">
+		<h3 class="head_center">Lista 2</h3>
+		<input type="button" value="Exercicio 1" onclick="lst2_ex1()">
+		<input type="button" value="Exercicio 2" onclick="lst2_ex2()">
+		<input type="button" value="Exercicio 3" onclick="lst2_ex3()">
+		<input type="button" value="Exercicio 4" onclick="lst2_ex4()">
+		<input type="button" value="Exercicio 5" onclick="lst2_ex5()">
+		<input type="button" value="Exercicio 6" onclick="lst2_ex6()">
+		<input type="button" value="Exercicio 7" onclick="lst2_ex7()">
+	</div>
 </div>
+
+
 <h6>Site bem simplão mesmo!</h6>
 </main>
 </body>
+	<script type="text/javascript" src="lista1_ex1.js"></script>
+	<script type="text/javascript" src="lista1_ex2.js"></script>
+	<script type="text/javascript" src="lista1_ex3.js"></script>
+	<script type="text/javascript" src="lista1_ex4.js"></script>
+	<script type="text/javascript" src="lista1_ex5.js"></script>
+	<script type="text/javascript" src="lista1_ex6.js"></script>
+	<script type="text/javascript" src="lista1_ex7.js"></script>
+	<script type="text/javascript" src="lista1_ex8.js"></script>
+	<script type="text/javascript" src="lista1_ex9.js"></script>
+	<script type="text/javascript" src="lista1_ex10.js"></script>
+	<script type="text/javascript" src="lista1_ex11.js"></script>
+	<script type="text/javascript" src="lista1_ex12.js"></script>
+	<script type="text/javascript" src="lista1_ex13.js"></script>
+	<script type="text/javascript" src="lista1_ex14.js"></script>
+	<script type="text/javascript" src="lista1_ex15.js"></script>
+	<script type="text/javascript" src="lista1_ex16.js"></script>
+
+	<script type="text/javascript" src="lista2_ex1.js"></script>
+	<script type="text/javascript" src="lista2_ex2.js"></script>
+	<script type="text/javascript" src="lista2_ex3.js"></script>
+	<script type="text/javascript" src="lista2_ex4.js"></script>
+	<script type="text/javascript" src="lista2_ex5.js"></script>
+	<script type="text/javascript" src="lista2_ex6.js"></script>
+	<script type="text/javascript" src="lista2_ex7.js"></script>
 </html>
