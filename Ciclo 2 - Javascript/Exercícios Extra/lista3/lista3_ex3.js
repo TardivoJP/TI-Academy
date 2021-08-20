@@ -1,14 +1,15 @@
-/*Faça um programa que calcule e mostre a área de um triângulo. 
-Sabe-se que: Área = (base * altura)/2.*/
+/*Faça um programa que receba um número inteiro e 
+verifique se esse número é par ou ímpar.*/
 
-function lst1_ex9(){
+function lst3_ex3(){
 
-base=parseFloat(prompt("Insira a medida da base do triângulo"));
-altura=parseFloat(prompt("Insira a medida da altura do triângulo"));
+num=parseInt(prompt("Insira um número."));
 
-area=((base+altura)/2);
-
-document.write("A área deste triângulo é "+area.toFixed(1));
+if(num%2==0){
+	document.write("O número "+num+" é par.")
+}else{
+	document.write("O número "+num+" é ímpar.")
+}
 
 
 

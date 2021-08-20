@@ -44,7 +44,7 @@ document.write("Se passaram "+parseFloat(segundo.toFixed(2))+" "+plural_s+", "+p
 (function botao() {
     var btnz = document.createElement('input');
     btnz.setAttribute("class", "bitao");
-    btnz.setAttribute('type', 'button'); // input element of type button
+    btnz.setAttribute('type', 'button');
     btnz.setAttribute('value', 'Voltar');
     btnz.style.width = "100px";
     btnz.style.height = "50px";
