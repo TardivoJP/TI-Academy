@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+	<script type="text/javascript" src="ceps.js"></script>
+	<link rel="stylesheet" type="text/css" href="site2.css">
+	<title>Projeto CEP</title>
+</head>
+<body>
+	<header>
+			<h1>ME ACHA!</h1>
+			<h2>Encontre um endereço pelo número de CEP</h2>
+
+			<div id="content-base" class="flex justify-content">
+					<div id="logo-principal" class="flex justify-content">
+						<span class="material-icons logo">travel_explore</span>
+					</div>
+			</div>
+	</header>
+		<main>
+			<div id="conteudo-geral" class="flex justify-content">
+				<div class="box-custom flex justify-content">
+					<form>
+						<label>CEP
+							<input class="cxCep" type="text" name="CEP" required>
+						</label>
+						<label>Rua
+							<input id="logradouro" type="text" name="Rua" readonly>
+						</label>
+						<label>Bairro
+							<input id="bairro" type="text" name="Bairro" readonly>
+						</label>
+						<label>Cidade
+							<input id="localidade" type="text" name="Cidade" readonly>
+						</label>
+						<label>UF
+							<input id="uf" type="text" name="UF" readonly>
+						</label>
+						<div class="display-btn flex justify-content">
+							<input id="btnBuscaCep" class="btn" type="button" value="Buscar" name="Buscar">
+						</div>
+					</form>
+				</div>
+			</div>
+		</main>
+	<footer></footer>
+</body>
+</html>
