@@ -11,7 +11,7 @@ n1=prompt("Insira a hora de início do jogo\nObs. utilize o formato de hora que 
 	horas1=Number(tempo1[0]);
 	minutos1=Number(tempo1[1]);
 
-while((horas1>=24)||(horas1!==horas1)||(minutos1>=60)||(minutos1!==minutos1)){
+while((horas1>=24)||(horas1<0)||(horas1!==horas1)||(minutos1>=60)||(minutos1!==minutos1)){
 	alert("Você não digitou um horário válido!")
 	n1=prompt("Insira a hora de início do jogo\nOBS. UTILIZE O FORMATO DE HORA QUE VAI DAS 00hr00min ATÉ AS 23hr59min");
 	tempo1=n1.split(/hr|min/);
@@ -25,7 +25,7 @@ n2=prompt("Insira a hora final do jogo\nObs. utilize o formato de hora que vai d
 	horas2=Number(tempo2[0]);
 	minutos2=Number(tempo2[1]);
 
-while((horas2>=24)||(horas2!==horas2)||(minutos2>=60)||(minutos2!==minutos2)){
+while((horas2>=24)||(horas2<0)||(horas2!==horas2)||(minutos2>=60)||(minutos2!==minutos2)){
 	alert("Você não digitou um horário válido!")
 	n2=prompt("Insira a hora final do jogo\nOBS. UTILIZE O FORMATO DE HORA QUE VAI DAS 00hr00min ATÉ AS 23hr59min");
 	tempo2=n2.split(/hr|min/);
