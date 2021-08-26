@@ -14,7 +14,7 @@ module.exports = {
           model: 'clientes',
           key: 'id'
         },
-        ondDelete: 'CASCADE',
+        onDelete: 'CASCADE',
         onUpdate: 'CASCADE'
       },
       idServico: {
@@ -23,7 +23,7 @@ module.exports = {
           model: 'servicos',
           key: 'id'
         },
-        ondDelete: 'CASCADE',
+        onDelete: 'CASCADE',
         onUpdate: 'CASCADE'
       },
       valor: {
