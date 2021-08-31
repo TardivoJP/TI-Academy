@@ -7,6 +7,8 @@ const app=express();
 app.use(cors());
 app.use(express.json());
 
+const { Op, json } = require("sequelize");
+
 let cliente=models.Cliente;
 let servico=models.Servico;
 let pedido=models.Pedido;
@@ -72,7 +74,9 @@ app.get('/servico/:id',async(req, res)=>{
     });
 });
 
-//visualize todos os clientes
+
+//////////EXERCÍCIOS EM SALA - AULA 30/08//////////
+//EX 1 - visualize todos os clientes
 app.get('/listaclientes',async(req, res)=>{
     await cliente.findAll({
         raw: true
@@ -81,7 +85,7 @@ app.get('/listaclientes',async(req, res)=>{
     });
 });
 
-//visualize todos os clientes em ordem de antiguidade
+//EX 2 - visualize todos os clientes em ordem de antiguidade
 app.get('/listaclientesantig',async(req, res)=>{
     await cliente.findAll({
         order:[['createdAt']]
@@ -90,7 +94,7 @@ app.get('/listaclientesantig',async(req, res)=>{
     });
 });
 
-//visualize todos os pedidos
+//EX 3 - visualize todos os pedidos
 app.get('/listapedidos',async(req, res)=>{
     await pedido.findAll({
         raw: true
@@ -99,7 +103,7 @@ app.get('/listapedidos',async(req, res)=>{
     });
 });
 
-//visualize todos os pedidos em ordem de valor
+//EX 4 - visualize todos os pedidos em ordem de valor
 app.get('/listapedidosvalor',async(req, res)=>{
     await pedido.findAll({
         order:[['valor','DESC']]
@@ -108,7 +112,7 @@ app.get('/listapedidosvalor',async(req, res)=>{
     });
 });
 
-//visualizar numero de clientes
+//EX 5 - visualizar numero de clientes
 app.get('/numclientes',async(req, res)=>{
     await cliente.count('id')
     .then(function(clientes){
@@ -116,13 +120,204 @@ app.get('/numclientes',async(req, res)=>{
     });
 });
 
-//visualizar numero de pedidos
+//EX 6 - visualizar numero de pedidos
 app.get('/numpedidos',async(req, res)=>{
     await pedido.count('id')
     .then(function(pedidos){
         res.json({pedidos})
     });
 });
+//////////FIM DOS EXERCÍCIOS EM SALA - AULA 30/08//////////
+
+
+//////////DESAFIO - AULA 30/08//////////
+//somar todos os valores gastos por um cliente específico
+app.get('/clientegastou/:id',async(req, res)=>{
+    await pedido.sum('valor', {where: { ClienteId: { [Op.eq]:req.params.id } } })
+    .then(function(totalGastoCliente){
+        res.json({totalGastoCliente})
+    });
+});
+//explicando a função acima, para fins didáticos de anotação!
+//
+//então, se eu entendi corretamente temos um caminho ou url na linha 129 deste documento
+//nesta linha, declaramos um :id, que será algum valor escolhido pelo usuário
+//digamos '/clientegastou/3' ou '/clientegastou/2' por exemplo
+//ou seja, a BEM GROSSO MODO mesmo, é quase que um prompt para o usário preencher uma variável
+//e depois vamos utilizar ela posteriormente para apontar o ClienteId correto
+//
+//
+//agora vamos por partes,  " pedido.sum('valor', " seria a nossa tabela de pedidos, conforme
+//a let declarada na linha 14 deste arquivo, e estamos realizando a SOMA da COLUNA 'valor'
+//
+//o where seria "aonde", estamos limitando os valores que serão somados a alguma condição de nossa escolha
+//
+//assim correlacionamos com o ClienteId, ou seja, estamos apontando esta OUTRA COLUNA AINDA NA TABELA PEDIDOS, 
+//para verificar alguma condição! isso a princípio tinha ficado um pouco confuso para mim mas é muito importante destacar,
+//nunca saímos da tabela pedidos em momento algum, estamos sempre trabalhando nela, embasado em suas colunas!
+//
+//finalmente, temos " [Op.eq]:req.params.id " que seriam as nossas CONDIÇÕES de comparação com a COLUNA ClienteId
+//lembrando que tivemos que declarar " const { Op } " na linha 10 deste documento para que ela possa ser utilizada!
+//o que estamos dizendo aqui? " [Op.eq] " significa IGUAL, mas igual a que? igual a " req.params.id ", mas o que é isso?
+//isso é aquela "variável" que declaramos alí na linha 129 no caminho ou url! ou seja, no fim das contas estamos dizendo assim:
+//computador, faça a SOMA dos números na COLUNA valor da TABELA pedidos, mas APENAS aqueles com o mesmo ClienteId
+//que foi digitano no caminho ou url pelo usuário
+//
+//voltando ao nosso exemplo anterior, digamos que o usuário digite '/clientegastou/3' ou '/clientegastou/2' por exemplo
+//ele ou ela estaria pedindo a soma de todos os valores do ClienteId 3 no primeiro caso ou ClienteId 2 no segundo caso
+//
+//////////FIM DO DESAFIO - AULA 30/08//////////
+
+
+//mudar um serviço
+app.get('/atualizaservico',async(req,res)=>{
+    await servico.findByPk(3)
+    .then(servico=>{
+        servico.nome='HTML/CSS/JS';
+        servico.descricao='Páginas estáticas e dinâmicas estilizadas';
+        servico.save();
+        return res.json({servico});
+    });
+});
+
+//mudar um serviço através do body
+app.put('/editarservico', (req,res)=>{
+    servico.update(req.body,{
+        where: {id: req.body.id}
+    }).then(function(){
+        return res.json({
+            error: false,
+            message: "Serviço foi alterado com sucesso."
+        });
+    }).catch(function(erro){
+        return res.status(400).json({
+            error: true,
+            message: "Erro na alteração do serviço."
+        });
+    });
+});
+
+//buscar pedidos de um servico especifico
+app.get('/servicospedidos',async(req,res)=>{
+    await servico.findByPk(3, {
+        include:[{all:true}]
+    }).then(servico=>{
+        return res.json({servico});
+    });   
+});
+
+
+//mudar um pedido através do body
+app.put('/editarpedido', (req,res)=>{
+    pedido.update(req.body,{
+        where: {ServicoId: req.body.ServicoId}
+    }).then(function(){
+        return res.json({
+            error: false,
+            message: "Pedido foi alterado com sucesso."
+        });
+    }).catch(function(erro){
+        return res.status(400).json({
+            error: true,
+            message: "Erro na alteração do pedido."
+        });
+    });
+});
+
+
+//////////EXERCÍCIOS EM SALA - AULA 31/08//////////
+//EX 1 - buscar por pedidos de clientes passando o id do cliente no corpo da requisição
+app.get('/listarpedidos/:id',async(req, res)=>{
+    await pedido.findAll({ where: {ClienteId: [req.params.id]} })
+    .then(function(pedidos){
+        res.json({pedidos})
+    });
+    console.log(pedidos,valor,ClienteId)
+});
+
+//EX 1 ALTERNATIVO - buscar por pedidos de clientes utilizando o findbypk
+app.get('/clientepedidos',async(req,res)=>{
+    await cliente.findByPk(2, {
+        include:[{all:true}]
+    }).then(cliente=>{
+        return res.json({cliente});
+    });   
+});
+
+//EX 2 - consultar clientes e faça edição de um cliente pelo método put
+//
+//http://localhost:3000/listaclientes
+//
+//e depois
+app.put('/editarcliente', (req,res)=>{
+    cliente.update(req.body,{
+        where: {id: req.body.id}
+    }).then(function(){
+        return res.json({
+            error: false,
+            message: "Cliente foi alterado com sucesso."
+        });
+    }).catch(function(erro){
+        return res.status(400).json({
+            error: true,
+            message: "Erro na alteração do cliente."
+        });
+    });
+});
+
+
+//EX 3 - consultar pedidos e faça edição de um pedido pelo método put
+//
+//http://localhost:3000/listapedidos
+//
+//e depois
+//
+//http://localhost:3000/editarpedido
+//
+//ou utilizar o put abaixo
+app.put('/editapedido/:id', (req,res)=>{
+    pedido.update(req.body,{
+        where: {id: req.params.id}
+    }).then(function(){
+        return res.json({
+            error: false,
+            message: "Pedido alterado com sucesso."
+        });
+    }).catch(function(erro){
+        return res.status(400).json({
+            error: true,
+            message: "Erro na alteração do pedido."
+        });
+    });
+});
+//////////FIM DOS EXERCÍCIOS EM SALA - AULA 31/08//////////
+
+
+//excluir um cliente
+app.get('/excluircliente',async(req,res)=>{
+    cliente.destroy({
+        where: {id: 4}
+    });
+});
+
+
+//excluir cliente pelo id na rota
+app.delete('/apagarcliente/:id',(req,res)=>{
+    cliente.destroy({
+        where: {id:req.params.id}
+    }).then(function(){
+        return res.json({
+            error: false,
+            message: "Cliente excluído com sucesso."
+        });
+    }).catch(function(){
+        return res.status(400).json({
+            error: true,
+            message: "Não foi possível excluir o cliente."
+        });
+    });
+});
+
 
 let port=process.env.PORT || 3000;
 
