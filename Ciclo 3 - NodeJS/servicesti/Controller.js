@@ -232,7 +232,6 @@ app.get('/listarpedidos/:id',async(req, res)=>{
     .then(function(pedidos){
         res.json({pedidos})
     });
-    console.log(pedidos,valor,ClienteId)
 });
 
 //EX 1 ALTERNATIVO - buscar por pedidos de clientes utilizando o findbypk
