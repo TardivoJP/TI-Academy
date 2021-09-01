@@ -245,7 +245,7 @@ app.get('/clientepedidos',async(req,res)=>{
 
 //EX 2 - consultar clientes e faça edição de um cliente pelo método put
 //
-//http://localhost:3000/listaclientes
+//http://localhost:3000/listaclientes (linha 80 deste documento)
 //
 //e depois
 app.put('/editarcliente', (req,res)=>{
@@ -267,13 +267,13 @@ app.put('/editarcliente', (req,res)=>{
 
 //EX 3 - consultar pedidos e faça edição de um pedido pelo método put
 //
-//http://localhost:3000/listapedidos
+//http://localhost:3000/listapedidos (linha 98 deste documento)
 //
 //e depois
 //
-//http://localhost:3000/editarpedido
+//http://localhost:3000/editarpedido (linha 211 deste documento)
 //
-//ou utilizar o put abaixo
+//ou utilizar o put abaixo com id específico
 app.put('/editapedido/:id', (req,res)=>{
     pedido.update(req.body,{
         where: {id: req.params.id}
@@ -316,6 +316,44 @@ app.delete('/apagarcliente/:id',(req,res)=>{
         });
     });
 });
+
+
+//////////DESAFIO - AULA 31/08//////////
+//1. faça uma rota que liste todos os pedidos de um cliente
+//2. crie uma nova rota que permita alterar esse pedido utilizando o ClienteId
+//
+//
+//em tese, a primeira parte seria a mesma coisa do exercício 1 da aula 31/08 (linha 229 deste documento)
+//segue abaixo o mesmo código, mas comentado para não causar conflitos
+/*
+app.get('/listarpedidos/:id',async(req, res)=>{
+    await pedido.findAll({ where: {ClienteId: [req.params.id]} })
+    .then(function(pedidos){
+        res.json({pedidos})
+    });
+});
+*/
+//
+//após isso, a segunda parte também é similar ao exercício 3 da aula 31/08 (linha 277 deste documento)
+//porém, realizamos uma pequena alteração no where para mudar apenas os pedidos com o mesmo ClienteId
+//que o usuário inseriu na rota ou url
+
+app.put('/mudarpedido/:ClienteId', (req,res)=>{
+    pedido.update(req.body,{
+        where: {ClienteId: req.body.ClienteId}
+    }).then(function(){
+        return res.json({
+            error: false,
+            message: "Pedido foi alterado com sucesso."
+        });
+    }).catch(function(erro){
+        return res.status(400).json({
+            error: true,
+            message: "Erro na alteração do pedido."
+        });
+    });
+});
+//////////FIM DO DESAFIO - AULA 31/08//////////
 
 
 let port=process.env.PORT || 3000;
