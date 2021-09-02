@@ -356,7 +356,7 @@ app.put('/mudarpedido/:ClienteId', (req,res)=>{
 //////////FIM DO DESAFIO - AULA 31/08//////////
 
 
-let port=process.env.PORT || 3000;
+let port=process.env.PORT || 3001;
 
 app.listen(port,(req,res)=>{
     console.log('Servidor está ativo');
