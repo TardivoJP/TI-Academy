@@ -24,6 +24,15 @@ export const Menu = (props) => {
                             <NavItem>
                                 <NavLink href="/">Home</NavLink>
                             </NavItem>
+                            <NavItem>
+                                <NavLink href="/visualizarcliente">Clientes</NavLink>
+                            </NavItem>
+                            <NavItem>
+                                <NavLink href="/visualizarservico">Serviços</NavLink>
+                            </NavItem>
+                            <NavItem>
+                                <NavLink href="/visualizarpedido">Pedidos</NavLink>
+                            </NavItem>
                         </Nav>
                     </Collapse>
                 </Container>

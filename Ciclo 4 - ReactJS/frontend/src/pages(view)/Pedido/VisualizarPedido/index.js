@@ -1,6 +1,6 @@
 import { Container, Table } from "reactstrap";
 
-export const VisualizarServico = () => {
+export const VisualizarPedido = () => {
     return (
         <div className="p-3">
             <Container>
@@ -8,29 +8,37 @@ export const VisualizarServico = () => {
                     <Table striped dark hover>
                         <thead>
                             <tr>
-                                <th>ID</th>
-                                <th>Serviço</th>
-                                <th>Descrição</th>
+                                <th>ID Pedido</th>
+                                <th>ID Cliente</th>
+                                <th>ID Serviço</th>
+                                <th>Valor</th>
+                                <th>Data</th>
                                 <th>Ações</th>
                             </tr>
                         </thead>
                         <tbody>
                             <tr>
                                 <th scope="row">1</th>
-                                <td>HTML/CSS</td>
-                                <td>Páginas web estáticas</td>
+                                <td>1</td>
+                                <td>1</td>
+                                <td>R$ 999,99</td>
+                                <td>27/08/2021</td>
                                 <td>"(Placeholder)"</td>
                             </tr>
                             <tr>
                                 <th scope="row">2</th>
-                                <td>JS</td>
-                                <td>Páginas web dinâmicas</td>
+                                <td>2</td>
+                                <td>2</td>
+                                <td>R$ 499,99</td>
+                                <td>30/08/2021</td>
                                 <td>"(Placeholder)"</td>
                             </tr>
                             <tr>
                                 <th scope="row">3</th>
-                                <td>SQL</td>
-                                <td>Banco de dados</td>
+                                <td>3</td>
+                                <td>1</td>
+                                <td>R$ 999,99</td>
+                                <td>31/08/2021</td>
                                 <td>"(Placeholder)"</td>
                             </tr>
                         </tbody>
@@ -43,7 +51,7 @@ export const VisualizarServico = () => {
                             <a href="/visualizarcliente" className="btn btn-outline-primary btn-md">Cliente</a>
                         </div>
                         <div className="p-2">
-                            <a href="/visualizarpedido" className="btn btn-outline-primary btn-md">Pedido</a>
+                            <a href="/visualizarservico" className="btn btn-outline-primary btn-md">Serviço</a>
                         </div>
                     </div>
                 </div>
