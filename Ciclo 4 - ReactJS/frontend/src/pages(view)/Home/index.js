@@ -5,8 +5,10 @@ export const Home = () => {
         <div>
             <Container>
                 <div className="d-flex flex-column justify-content-center align-items-center">
-                    <div className="mr-auto p-2">
-                        <h1>Página inicial</h1>
+                    <div className="w-100 m-auto mt-3 p-3 border rounded-pill d-flex justify-content-center align-items-center" style={{ background: '#23bceb' }}>
+                        <div className="m-auto p-2">
+                            <h1>Página inicial</h1>
+                        </div>
                     </div>
                     <div className="d-flex justify-content-center">
                         <div className="p-2">
