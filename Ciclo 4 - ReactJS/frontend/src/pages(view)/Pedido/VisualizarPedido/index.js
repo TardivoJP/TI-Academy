@@ -1,10 +1,43 @@
-import { Container, Table } from "reactstrap";
+import axios from 'axios';
+import { useEffect, useState } from 'react';
+import { Link } from 'react-router-dom';
+import { Alert, Container, Table } from "reactstrap";
+
+import { api } from '../../../config';
 
 export const VisualizarPedido = () => {
+
+    const [data, setData] = useState([]);
+
+    const [status, setStatus] = useState({
+        type: '',
+        message: ''
+    });
+
+    const getPedidos = async () => {
+        await axios.get(api + "/listapedidos")
+            .then((response) => {
+                console.log(response.data.pedidos);
+                setData(response.data.pedidos);
+            })
+            .catch(() => {
+                setStatus({
+                    type: 'error',
+                    message: 'Erro: Não foi possível conectar a API.'
+                })
+            });
+    }
+
+    useEffect(() => {
+        getPedidos();
+    }, []);
+
+
     return (
         <div className="p-3">
             <Container>
                 <div className="d-flex flex-column">
+                    {status.type === 'error' ? <Alert color="danger">{status.message}</Alert> : ""}
                     <Table striped dark hover>
                         <thead>
                             <tr>
@@ -13,34 +46,22 @@ export const VisualizarPedido = () => {
                                 <th>ID Serviço</th>
                                 <th>Valor</th>
                                 <th>Data</th>
-                                <th>Ações</th>
+                                <th className="text-center">Ações</th>
                             </tr>
                         </thead>
                         <tbody>
-                            <tr>
-                                <th scope="row">1</th>
-                                <td>1</td>
-                                <td>1</td>
-                                <td>R$ 999,99</td>
-                                <td>27/08/2021</td>
-                                <td>"(Placeholder)"</td>
-                            </tr>
-                            <tr>
-                                <th scope="row">2</th>
-                                <td>2</td>
-                                <td>2</td>
-                                <td>R$ 499,99</td>
-                                <td>30/08/2021</td>
-                                <td>"(Placeholder)"</td>
-                            </tr>
-                            <tr>
-                                <th scope="row">3</th>
-                                <td>3</td>
-                                <td>1</td>
-                                <td>R$ 999,99</td>
-                                <td>31/08/2021</td>
-                                <td>"(Placeholder)"</td>
-                            </tr>
+                            {data.map(item => (
+                                <tr key={item.id}>
+                                    <td>{item.id}</td>
+                                    <td>{item.ClienteId}</td>
+                                    <td>{item.ServicoId}</td>
+                                    <td>{item.valor}</td>
+                                    <td>{item.data}</td>
+                                    <td className="text-center">
+                                        <Link to={"/pedido/" + item.id} className="btn btn-outline-primary btn-sm">Consultar</Link>
+                                    </td>
+                                </tr>
+                            ))}
                         </tbody>
                     </Table>
                     <div className="d-flex justify-content-center">

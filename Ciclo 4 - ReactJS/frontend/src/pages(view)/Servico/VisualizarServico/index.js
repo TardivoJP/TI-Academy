@@ -43,7 +43,7 @@ export const VisualizarServico = () => {
                                 <th>ID</th>
                                 <th>Serviço</th>
                                 <th>Descrição</th>
-                                <th className="text-center">Ações</th>
+                                <th colspan="2" className="text-center">Ações</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -53,7 +53,10 @@ export const VisualizarServico = () => {
                                     <td>{item.nome}</td>
                                     <td>{item.descricao}</td>
                                     <td className="text-center">
-                                        <Link to={"/servico/"+item.id} className="btn btn-outline-primary btn-sm">Consultar</Link>
+                                        <Link to={"/servico/"+item.id} className="btn btn-outline-primary btn-sm">Consultar Serviço</Link>
+                                    </td>
+                                    <td className="text-center">
+                                        <Link to={"/servicopedidos/" + item.id} className="btn btn-outline-primary btn-sm">Consultar Pedidos</Link>
                                     </td>
                                 </tr>
                             ))}

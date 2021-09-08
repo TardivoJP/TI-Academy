@@ -75,6 +75,40 @@ app.get('/servico/:id',async(req, res)=>{
 });
 
 
+//visualizar um cliente com id específico
+app.get('/cliente/:id',async(req, res)=>{
+    cliente.findByPk(req.params.id)
+    .then(cliente=>{
+        return res.json({
+            error:false,
+            cliente
+        });
+    }).catch(function(erro){
+        return res.status(400).json({
+            error:true,
+            message:"Esse código não está cadastrado!"
+        });
+    });
+});
+
+
+//visualizar um pedido com id específico
+app.get('/pedido/:id',async(req, res)=>{
+    pedido.findByPk(req.params.id)
+    .then(pedido=>{
+        return res.json({
+            error:false,
+            pedido
+        });
+    }).catch(function(erro){
+        return res.status(400).json({
+            error:true,
+            message:"Esse código não está cadastrado!"
+        });
+    });
+});
+
+
 //////////EXERCÍCIOS EM SALA - AULA 30/08//////////
 //EX 1 - visualize todos os clientes
 app.get('/listaclientes',async(req, res)=>{
@@ -229,6 +263,15 @@ app.put('/editarpedido', (req,res)=>{
 //EX 1 - buscar por pedidos de clientes passando o id do cliente no corpo da requisição
 app.get('/listarpedidos/:id',async(req, res)=>{
     await pedido.findAll({ where: {ClienteId: [req.params.id]} })
+    .then(function(pedidos){
+        res.json({pedidos})
+    });
+});
+
+
+//buscar por pedidos de SERVICOS passando o id do cliente no corpo da requisição
+app.get('/listarpedidoss/:id',async(req, res)=>{
+    await pedido.findAll({ where: {ServicoId: [req.params.id]} })
     .then(function(pedidos){
         res.json({pedidos})
     });
