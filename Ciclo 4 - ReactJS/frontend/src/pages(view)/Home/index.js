@@ -12,13 +12,13 @@ export const Home = () => {
                     </div>
                     <div className="d-flex justify-content-center">
                         <div className="p-2">
-                            <a href="/visualizarcliente" className="btn btn-outline-primary btn-sm">Cliente</a>
+                            <a href="/visualizarcliente" className="btn btn-outline-primary btn-lg">Cliente</a>
                         </div>
                         <div className="p-2">
-                            <a href="/visualizarservico" className="btn btn-outline-primary btn-sm">Serviço</a>
+                            <a href="/visualizarservico" className="btn btn-outline-primary btn-lg">Serviço</a>
                         </div>
                         <div className="p-2">
-                            <a href="/visualizarpedido" className="btn btn-outline-primary btn-sm">Pedido</a>
+                            <a href="/visualizarpedido" className="btn btn-outline-primary btn-lg">Pedido</a>
                         </div>
                     </div>
                 </div>

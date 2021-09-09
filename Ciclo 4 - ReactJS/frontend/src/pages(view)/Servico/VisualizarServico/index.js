@@ -35,7 +35,17 @@ export const VisualizarServico = () => {
     return (
         <div className="p-3">
             <Container>
-                <div className="d-flex flex-column">
+                <div className="w-100 m-auto mt-3 p-3 border rounded-pill d-flex justify-content-center align-items-center" style={{ background: 'rgba(16,100,199,0.33)' }}>
+                    <div className="m-auto p-2">
+                        <h1>Tabela dos Serviços</h1>
+                    </div>
+                </div>
+                <div className="p-2 d-flex justify-content-center">
+                    <div className="p-2">
+                        <a href="/cadastrarservico" className="btn btn-outline-primary btn-md">Criar novo serviço</a>
+                    </div>
+                </div>
+                <div className="p-2 d-flex flex-column">
                     {status.type === 'error' ? <Alert color="danger">{status.message}</Alert> : ""}
                     <Table striped dark hover>
                         <thead>
@@ -53,7 +63,7 @@ export const VisualizarServico = () => {
                                     <td>{item.nome}</td>
                                     <td>{item.descricao}</td>
                                     <td className="text-center">
-                                        <Link to={"/servico/"+item.id} className="btn btn-outline-primary btn-sm">Consultar Serviço</Link>
+                                        <Link to={"/servico/" + item.id} className="btn btn-outline-primary btn-sm">Consultar Serviço</Link>
                                     </td>
                                     <td className="text-center">
                                         <Link to={"/servicopedidos/" + item.id} className="btn btn-outline-primary btn-sm">Consultar Pedidos</Link>

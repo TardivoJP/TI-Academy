@@ -27,10 +27,19 @@ app.post('/clientes',async(req, res)=>{
 
 //criar novo servico
 app.post('/servicos',async(req, res)=>{
-    let create=await servico.create(
+
+    await servico.create(
         req.body
-    );
+    )
     res.send('Serviço foi inserido!');
+
+    await aguardar(3000);
+
+    function aguardar(ms){
+        return new Promise((resolve)=>{
+            setTimeout(resolve.ms);
+        });
+    };
 });
 
 //criar novo pedido

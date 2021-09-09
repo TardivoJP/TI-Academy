@@ -7,6 +7,7 @@ import { VisualizarServico } from './pages(view)/Servico/VisualizarServico';
 import { Menu } from './components/Menu';
 import { Servico } from './pages(view)/Servico/Servico';
 import { ServicoPedidos } from './pages(view)/Servico/ServicoPedidos';
+import { CadastrarServico } from './pages(view)/Servico/Cadastrar';
 import { Cliente } from './pages(view)/Cliente/Cliente';
 import { ClientePedidos } from './pages(view)/Cliente/ClientePedidos';
 import { Pedido } from './pages(view)/Pedido/Pedido';
@@ -23,6 +24,7 @@ function App() {
           <Route exact path="/visualizarpedido" component={VisualizarPedido} />
           <Route path="/servico/:id" component={Servico} />
           <Route path="/servicopedidos/:id" component={ServicoPedidos} />
+          <Route path="/cadastrarservico" component={CadastrarServico} />
           <Route path="/cliente/:id" component={Cliente} />
           <Route path="/clientepedidos/:id" component={ClientePedidos} />
           <Route path="/pedido/:id" component={Pedido} />
