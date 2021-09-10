@@ -13,47 +13,80 @@ let cliente=models.Cliente;
 let servico=models.Servico;
 let pedido=models.Pedido;
 
+function aguardar(ms){
+    return new Promise((resolve)=>{
+        setTimeout(resolve, ms);
+    });
+};
+
 app.get('/',function(req, res){
     res.send('Olá mundo!');
 });
 
 //criar novo cliente
 app.post('/clientes',async(req, res)=>{
-    let create=await cliente.create(
+    
+    await aguardar(3000);
+
+    await cliente.create(
         req.body
-    );
-    res.send('Cliente foi inserido!');
+    ).then(() => {
+        return res.json({
+            type: "success",
+            message: "Cliente foi criado com sucesso."
+        });
+    }).catch((erro) => {
+        return res.status(400).json({
+            type: "error",
+            message: "Erro na criação do cliente."
+        });
+    });
 });
 
 //criar novo servico
 app.post('/servicos',async(req, res)=>{
 
-    await servico.create(
-        req.body
-    )
-    res.send('Serviço foi inserido!');
-
     await aguardar(3000);
 
-    function aguardar(ms){
-        return new Promise((resolve)=>{
-            setTimeout(resolve.ms);
+    await servico.create(
+        req.body
+    ).then(() => {
+        return res.json({
+            type: "success",
+            message: "Serviço foi criado com sucesso."
         });
-    };
+    }).catch((erro) => {
+        return res.status(400).json({
+            type: "error",
+            message: "Erro na criação do serviço."
+        });
+    });
 });
 
 //criar novo pedido
 app.post('/pedidos',async(req, res)=>{
-    let create=await pedido.create(
+
+    await aguardar(3000);
+    
+    await pedido.create(
         req.body
-    );
-    res.send('Pedido foi inserido!');
+    ).then(() => {
+        return res.json({
+            type: "success",
+            message: "Pedido foi criado com sucesso."
+        });
+    }).catch((erro) => {
+        return res.status(400).json({
+            type: "error",
+            message: "Erro na criação do pedido."
+        });
+    });
 });
 
 //visualizar todos servicos
 app.get('/listaservicos',async(req, res)=>{
     await servico.findAll({
-        order:[['nome','DESC']]
+        order:[['id']]
     }).then(function(servicos){
         res.json({servicos})
     });
@@ -224,8 +257,10 @@ app.get('/atualizaservico',async(req,res)=>{
 });
 
 //mudar um serviço através do body
-app.put('/editarservico', (req,res)=>{
-    servico.update(req.body,{
+app.put('/editarservico',async(req,res)=>{
+    await aguardar(3000);
+
+    await servico.update(req.body,{
         where: {id: req.body.id}
     }).then(function(){
         return res.json({
@@ -251,9 +286,11 @@ app.get('/servicospedidos',async(req,res)=>{
 
 
 //mudar um pedido através do body
-app.put('/editarpedido', (req,res)=>{
-    pedido.update(req.body,{
-        where: {ServicoId: req.body.ServicoId}
+app.put('/editarpedido',async(req,res)=>{
+    await aguardar(3000);
+
+    await pedido.update(req.body,{
+        where: {id: req.body.id}
     }).then(function(){
         return res.json({
             error: false,
@@ -300,8 +337,10 @@ app.get('/clientepedidos',async(req,res)=>{
 //http://localhost:3000/listaclientes (linha 80 deste documento)
 //
 //e depois
-app.put('/editarcliente', (req,res)=>{
-    cliente.update(req.body,{
+app.put('/editarcliente',async(req,res)=>{
+    await aguardar(3000);
+
+    await cliente.update(req.body,{
         where: {id: req.body.id}
     }).then(function(){
         return res.json({
@@ -365,6 +404,42 @@ app.delete('/apagarcliente/:id',(req,res)=>{
         return res.status(400).json({
             error: true,
             message: "Não foi possível excluir o cliente."
+        });
+    });
+});
+
+
+
+app.delete('/apagarservico/:id',(req,res)=>{
+    servico.destroy({
+        where: {id:req.params.id}
+    }).then(function(){
+        return res.json({
+            error: false,
+            message: "Serviço excluído com sucesso."
+        });
+    }).catch(function(){
+        return res.status(400).json({
+            error: true,
+            message: "Não foi possível excluir o serviço."
+        });
+    });
+});
+
+
+
+app.delete('/apagarpedido/:id',(req,res)=>{
+    pedido.destroy({
+        where: {id:req.params.id}
+    }).then(function(){
+        return res.json({
+            error: false,
+            message: "Serviço excluído com sucesso."
+        });
+    }).catch(function(){
+        return res.status(400).json({
+            error: true,
+            message: "Não foi possível excluir o serviço."
         });
     });
 });

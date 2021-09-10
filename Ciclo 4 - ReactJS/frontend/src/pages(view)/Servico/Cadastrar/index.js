@@ -11,10 +11,10 @@ export const CadastrarServico = () => {
         descricao: ''
     });
 
-    const[status, setStatus]=useState({
-        formSave:false,
-        type:'',
-        message:''
+    const [status, setStatus] = useState({
+        formSave: false,
+        type: '',
+        message: ''
     })
 
     const valorInput = e => setServico({
@@ -25,34 +25,34 @@ export const CadastrarServico = () => {
         e.preventDefault();
 
         setStatus({
-            formSave:true
+            formSave: true
         });
 
-        const headers={
-            'Content-Type':'application/json'
+        const headers = {
+            'Content-Type': 'application/json'
         };
 
-        await axios.post(api + "/servicos", servico,{headers})
+        await axios.post(api + "/servicos", servico, { headers })
             .then((response) => {
-                if(response.data.error){
+                if (response.data.error) {
                     setStatus({
-                        formSave:false,
-                        type:'error',
-                        message:response.data.message
+                        formSave: false,
+                        type: 'error',
+                        message: response.data.message
                     });
-                }else{
+                } else {
                     setStatus({
-                        formSave:false,
-                        type:'success',
-                        message:response.data.message
+                        formSave: false,
+                        type: 'success',
+                        message: response.data.message
                     });
                 }
             })
             .catch(() => {
                 setStatus({
-                    formSave:false,
-                    type:'success',
-                    message:'Erro: não foi possível se conectar a API.'
+                    formSave: false,
+                    type: 'success',
+                    message: 'Erro: não foi possível se conectar a API.'
                 });
             });
     };
@@ -84,16 +84,22 @@ export const CadastrarServico = () => {
 
                         <div className="p-2 d-flex justify-content-center align-items-center">
                             {status.formSave ? <Button type="submit" outline color="warning" disabled>
-                            <Spinner style={{ width: '3rem', height: '3rem', color: 'primary' }} />{'Salvando...'}
-                            </Button> : 
-                            <Button type="submit" outline color="info">Cadastrar</Button>}
+                                <Spinner children="" style={{ width: '1.5rem', height: '1.5rem', marginRight: '0.5rem', color: 'primary' }} />{'Salvando...'}
+                            </Button> :
+                                <Button type="submit" outline color="success">Cadastrar</Button>}
+
+                            <Button className="m-2" type="reset" outline color="warning">Limpar</Button>
                         </div>
 
                     </Form>
                 </div>
 
-                {status.type === 'error' ? <Alert color="danger">{status.message}</Alert> : ""}
-                {status.type === 'success' ? <Alert color="success">{status.message}</Alert> : ""}
+                {status.type === 'error' ? <div className="w-100 p-2 d-flex justify-content-center align-items-center">
+                    <Alert className="w-50 d-flex justify-content-center align-items-center" color="danger">{status.message}</Alert>
+                </div> : ""}
+                {status.type === 'success' ? <div className="w-100 p-2 d-flex justify-content-center align-items-center">
+                    <Alert className="w-50 d-flex justify-content-center align-items-center" color="success">{status.message}</Alert>
+                </div> : ""}
 
                 <hr className="m-4"></hr>
                 <div className="d-flex justify-content-center">
@@ -101,9 +107,6 @@ export const CadastrarServico = () => {
                         <a href="/visualizarservico" className="btn btn-outline-primary btn-md">Voltar</a>
                     </div>
                 </div>
-
-
-
             </Container>
         </div>
     )

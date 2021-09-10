@@ -1,5 +1,6 @@
 import { Container } from 'reactstrap';
 
+
 export const Home = () => {
     return (
         <div>
@@ -10,7 +11,7 @@ export const Home = () => {
                             <h1>Página inicial</h1>
                         </div>
                     </div>
-                    <div className="d-flex justify-content-center">
+                    <div className="m-3 d-flex justify-content-center">
                         <div className="p-2">
                             <a href="/visualizarcliente" className="btn btn-outline-primary btn-lg">Cliente</a>
                         </div>
