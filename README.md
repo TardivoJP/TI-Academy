@@ -8,7 +8,7 @@ Código desenvolvido nas aulas + desafios
   **↳ 1** é referente aos exercícios extra de lógica de programação<br />
   **↳ IMPORTANTE ->** Utilizar o index HTML para ver cada exercício funcionando, pois foram programados
   como funções chamadas por botões na página para melhorar a organização<br /></pre>
-**Ciclo 3** - Contém **5** subpastas referente ao backend desenvolvido nas aulas de NodeJS + desafios<br /><pre>
+**Ciclo 3** - Contém **5** subpastas<br /><pre>
   **↳ 1** É referente ao backend desenvolvido nas aulas de NodeJS <br />
   **↳ 4** são referentes aos desafios, estas pastas foram criadas diretamente após cada aula, o primeiro
   do dia 26.08 é um arquivo PDF conforme solicitado, e os demais também contém screenshots para facilitar
