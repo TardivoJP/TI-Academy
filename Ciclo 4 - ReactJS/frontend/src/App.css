@@ -1,3 +1,15 @@
+:root {
+  --branco: #ffffff;
+  --preto: #000000;
+  --azul: #1c3eff;
+  --azulescuro: #1835db;
+  --amarelo: #ffcf33;
+  --verde: #04a102;
+  --fontepequena: 0.75em;
+  --fontemedia: 1.5em;
+  --fontegrande: 3em;
+}
+
 .App {
   text-align: center;
 }
@@ -35,4 +47,184 @@
   to {
     transform: rotate(360deg);
   }
+}
+
+/* css para a home */
+
+img#hero-img{
+  width: 100vw;
+  max-width: 100%;
+  height: 70vh;
+  object-fit: cover;
+}
+
+.hero-text {
+  position: absolute;
+  top: 35%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  color: var(--branco);
+  text-align: center;
+
+  font-size: clamp(1rem, 7.5vw, 5rem);
+
+  text-shadow: rgb(0, 0, 0) 2px 0px 0px, rgb(0, 0, 0) 1.75517px 0.958851px 0px, rgb(0, 0, 0) 
+  1.0806px 1.68294px 0px, rgb(0, 0, 0) 0.141474px 1.99499px 0px, rgb(0, 0, 0) -0.832294px 1.81859px 0px, rgb(0, 0, 0) 
+  -1.60229px 1.19694px 0px, rgb(0, 0, 0) -1.97999px 0.28224px 0px, rgb(0, 0, 0) -1.87291px -0.701566px 0px, rgb(0, 0, 0) 
+  -1.30729px -1.51361px 0px, rgb(0, 0, 0) -0.421592px -1.95506px 0px, rgb(0, 0, 0) 0.567324px -1.91785px 0px, rgb(0, 0, 0) 
+  1.41734px -1.41108px 0px, rgb(0, 0, 0) 1.92034px -0.558831px 0px;
+}
+
+.caixa-dos-botoes {
+  position: absolute;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  border-radius: 2.5rem;
+  box-shadow: 15px 19px 22px -9px rgba(0,0,0,0.38);
+}
+
+.grow { 
+  transition: all .2s ease-in-out;
+  color: var(--azul) !important;
+}
+
+.grow:hover {
+  transform: scale(1.2);
+  color: var(--azulescuro) !important;
+}
+
+
+img#rede-img{
+  width: 50%;
+  max-width: 50%;
+  object-fit: cover;
+}
+
+
+/* css geral */
+.justificar-texto{
+  text-align: justify;
+}
+
+.cor-texto-preta{
+  color: var(--preto) !important;
+}
+
+.cor-texto-branca{
+  color: var(--branco) !important;
+}
+
+.cor-texto-azul{
+  color: var(--azul) !important;
+}
+
+.cor-texto-amarelo{
+  color: var(--amarelo) !important;
+}
+
+.cor-texto-verde{
+  color: var(--verde) !important;
+}
+
+.fonte-media{
+  font-size: var(--fontemedia);
+}
+
+.cor-branca {
+  background-color: var(--branco);
+}
+
+.cor-preta {
+  background-color: var(--preto);
+}
+
+.cor-azul {
+  background-color: var(--azul);
+}
+
+.flex-responsivo{
+  display: flex;
+}
+
+.flex-responsivo-box-botoes{
+  display: flex;
+  width: 75%;
+}
+
+.margem-conteudo-responsiva{
+  margin-top: 15%;
+}
+
+.paragrafo-responsivo{
+  width: 50%;
+}
+
+.fonte-responsiva-icon{
+  font-size: clamp(1.5rem, 10vw, 7rem);
+}
+
+.fonte-responsiva-icon-media{
+  font-size: clamp(1rem, 5vw, 3rem);
+}
+
+.fonte-responsiva-icon-pequena{
+  font-size: clamp(1rem, 3vw, 1.5rem);
+}
+
+.fonte-responsiva{
+  font-size: clamp(1.5rem, 3vw, 2.5rem);
+}
+
+.fonte-responsiva-media{
+  font-size: clamp(1rem, 2vw, 2rem);
+}
+
+.fonte-responsiva-pequena{
+  font-size: clamp(1rem, 1.5vw, 1.5rem);
+}
+
+@media only screen and (max-width: 770px) {
+  .flex-responsivo{
+    flex-direction: column;
+  }
+
+  img#rede-img{
+    width: 100%;
+    max-width: 100%;
+  }
+
+  .paragrafo-responsivo{
+    width: 100%;
+  }
+}
+
+@media only screen and (max-width: 400px) {
+  .flex-responsivo-box-botoes{
+    flex-direction: column;
+    width: 40%;
+  }
+
+  img#hero-img{
+    height: 35vh;
+  }
+
+  .hero-text {
+    position: absolute;
+    top: 15%;
+  }
+
+  .margem-conteudo-responsiva{
+    margin-top: 50%;
+  }
+}
+
+
+/* css tabelas */
+.headerTabela{
+  border-radius: 2.5rem;
+  box-shadow: 15px 19px 22px -9px rgba(0,0,0,0.38);
+}
+
+.tabelaPedidoClientes{
+  width: 85%;
 }

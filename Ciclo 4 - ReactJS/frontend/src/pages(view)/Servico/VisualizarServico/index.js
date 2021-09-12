@@ -1,9 +1,16 @@
+import '../../../App.css';
 import axios from 'axios';
 import { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { Alert, Container, Table } from "reactstrap";
 
 import { api } from '../../../config';
+
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faFunnelDollar } from '@fortawesome/free-solid-svg-icons';
+import { library } from '@fortawesome/fontawesome-svg-core';
+
+library.add(faFunnelDollar);
 
 export const VisualizarServico = () => {
 
@@ -51,13 +58,15 @@ export const VisualizarServico = () => {
 
     const [data, setData] = useState([]);
 
+    const [numServicos, setNumServicos] = useState([]);
+
     const [status, setStatus] = useState({
         type: '',
         message: ''
     });
 
     const getServicos = async () => {
-        await axios.get(api + "/listaservicos")
+        await axios.get(api + radio)
             .then((response) => {
                 console.log(response.data.servicos);
                 setData(response.data.servicos);
@@ -69,6 +78,22 @@ export const VisualizarServico = () => {
                 })
             });
     }
+
+    useEffect(() => {
+        const getNumServicos = async () => {
+            await axios.get(api + "/numservicos")
+                .then((response) => {
+                    setNumServicos(response.data.servicos);
+                })
+                .catch(() => {
+                    setStatus({
+                        type: 'error',
+                        message: 'Erro: Não foi possível conectar a API.'
+                    })
+                });
+        }
+        getNumServicos();
+    },[]);
 
     const apagarServico = async (idServico) => {
         console.log(idServico);
@@ -97,43 +122,82 @@ export const VisualizarServico = () => {
         getServicos();
     }, []);
 
+    const [radio, setRadio] = useState("/listaservicos");
+
+    while ((radio !== "/listaservicos") || (radio !== "/listaservicosnome") || (radio !== "/listaservicosdescricao") ||
+        (radio !== "/listaservicosdata")) {
+        getServicos();
+        break;
+    }
+
     return (
-        <div className="p-3">
+        <div>
             <Container>
-                <div className="w-100 m-auto mt-3 p-3 border rounded-pill d-flex justify-content-center align-items-center" style={{ background: 'rgba(16,100,199,0.33)' }}>
-                    <div className="m-auto p-2">
-                        <h1>Tabela dos Serviços</h1>
+                <div className="w-100 d-flex justify-content-center align-items-center" style={{ marginTop: '2.5%' }}>
+                    <div className="w-75 p-4 border d-flex justify-content-center align-items-center headerTabela cor-branca">
+                        <div className="w-100 d-flex p-2 justify-content-center align-items-center">
+                            <div>
+                                <FontAwesomeIcon icon="funnel-dollar" className="fonte-responsiva-icon" style={{ color: 'var(--azul)' }} />
+                            </div>
+                            <div style={{ marginLeft: '5%', fontSize: 'var(--fontegrande)' }}>
+                                Tabela dos Serviços
+                            </div>
+                        </div>
                     </div>
                 </div>
-                <div className="p-2 d-flex justify-content-center">
+
+                <div className="p-2 d-flex justify-content-center" style={{ marginTop: '2.5%' }}>
                     <div className="p-2">
-                        <a href="/cadastrarservico" className="btn btn-outline-primary btn-lg">Criar novo serviço</a>
+                        <label class="btn btn-outline-primary disabled" for="option1">Ordenar por</label>
+                    </div>
+                    <div className="p-2">
+                        <input type="radio" className="btn-check" name="options" id="option1" autocomplete="off"
+                            checked={radio === "/listaservicos"} value="/listaservicos" onChange={(e) => { setRadio(e.target.value) }}></input>
+                        <label class="btn btn-outline-primary" for="option1">ID</label>
+                    </div>
+                    <div className="p-2">
+                        <input type="radio" className="btn-check" name="options" id="option2" autocomplete="off"
+                            checked={radio === "/listaservicosnome"} value="/listaservicosnome" onChange={(e) => { setRadio(e.target.value) }}></input>
+                        <label class="btn btn-outline-primary" for="option2">Nome</label>
+                    </div>
+                    <div className="p-2">
+                        <input type="radio" className="btn-check" name="options" id="option3" autocomplete="off"
+                            checked={radio === "/listaservicosdescricao"} value="/listaservicosdescricao" onChange={(e) => { setRadio(e.target.value) }}></input>
+                        <label class="btn btn-outline-primary" for="option3">Descrição</label>
+                    </div>
+                    <div className="p-2">
+                        <input type="radio" className="btn-check" name="options" id="option4" autocomplete="off"
+                            checked={radio === "/listaservicosdata"} value="/listaservicosdata" onChange={(e) => { setRadio(e.target.value) }}></input>
+                        <label class="btn btn-outline-primary" for="option4">Data</label>
                     </div>
                 </div>
+
                 <div className="p-2 d-flex flex-column">
                     {status.type === 'error' ? <Alert color="danger">{status.message}</Alert> : ""}
                     <Table striped dark hover>
                         <thead>
-                            <tr>
+                            <tr className="text-center">
                                 <th>ID</th>
                                 <th>Serviço</th>
                                 <th>Descrição</th>
-                                <th colSpan="3" className="text-center">Ações</th>
+                                <th>Criado em</th>
+                                <th colSpan="3">Ações</th>
                             </tr>
                         </thead>
                         <tbody>
                             {data.map(item => (
-                                <tr key={item.id}>
+                                <tr className="text-center" key={item.id}>
                                     <td>{item.id}</td>
                                     <td>{item.nome}</td>
                                     <td>{item.descricao}</td>
-                                    <td className="text-center">
+                                    <td>{item.createdAt}</td>
+                                    <td>
                                         <Link to={"/servico/" + item.id} className="btn btn-outline-primary btn-sm">Consultar</Link>
                                     </td>
-                                    <td className="text-center">
+                                    <td>
                                         <Link to={"/editarservico/" + item.id} className="btn btn-outline-warning btn-sm">Editar</Link>
                                     </td>
-                                    <td className="text-center">
+                                    <td>
 
                                         {/* Aqui, temos a nossa lógica do botão deletar, note que o className de cada elemento está baseado
                                         em uma lógica condicional if else
@@ -160,15 +224,26 @@ export const VisualizarServico = () => {
                             ))}
                         </tbody>
                     </Table>
-                    <div className="d-flex justify-content-center">
+
+                    <div className="text-center fonte-responsiva-pequena">
+                        <span className="cor-texto-azul">Número de serviços</span> - {numServicos}
+                    </div>
+
+                    <div className="p-2 d-flex justify-content-center">
                         <div className="p-2">
-                            <a href="/" className="btn btn-outline-primary btn-md">Voltar</a>
+                            <a href="/cadastrarservico" className="btn btn-outline-success btn-lg">Criar novo serviço</a>
+                        </div>
+                    </div>
+
+                    <div className="d-flex justify-content-center" style={{ marginBottom: '8%' }}>
+                        <div className="p-2">
+                            <a href="/" className="btn btn-outline-primary btn-lg">Voltar</a>
                         </div>
                         <div className="p-2">
-                            <a href="/visualizarcliente" className="btn btn-outline-primary btn-md">Cliente</a>
+                            <a href="/visualizarcliente" className="btn btn-outline-primary btn-lg">Clientes</a>
                         </div>
                         <div className="p-2">
-                            <a href="/visualizarpedido" className="btn btn-outline-primary btn-md">Pedido</a>
+                            <a href="/visualizarpedido" className="btn btn-outline-primary btn-lg">Pedidos</a>
                         </div>
                     </div>
                 </div>

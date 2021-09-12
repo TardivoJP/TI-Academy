@@ -83,10 +83,37 @@ app.post('/pedidos',async(req, res)=>{
     });
 });
 
-//visualizar todos servicos
+//visualizar todos servicos por id
 app.get('/listaservicos',async(req, res)=>{
     await servico.findAll({
         order:[['id']]
+    }).then(function(servicos){
+        res.json({servicos})
+    });
+});
+
+//visualizar todos servicos por nome
+app.get('/listaservicosnome',async(req, res)=>{
+    await servico.findAll({
+        order:[['nome']]
+    }).then(function(servicos){
+        res.json({servicos})
+    });
+});
+
+//visualizar todos servicos por descricao
+app.get('/listaservicosdescricao',async(req, res)=>{
+    await servico.findAll({
+        order:[['descricao']]
+    }).then(function(servicos){
+        res.json({servicos})
+    });
+});
+
+//visualizar todos servicos por data de criação
+app.get('/listaservicosdata',async(req, res)=>{
+    await servico.findAll({
+        order:[['createdAt']]
     }).then(function(servicos){
         res.json({servicos})
     });
@@ -152,10 +179,47 @@ app.get('/pedido/:id',async(req, res)=>{
 
 
 //////////EXERCÍCIOS EM SALA - AULA 30/08//////////
-//EX 1 - visualize todos os clientes
+//EX 1 - visualize todos os clientes por id
 app.get('/listaclientes',async(req, res)=>{
     await cliente.findAll({
-        raw: true
+        order:[['id']]
+    }).then(function(clientes){
+        res.json({clientes})
+    });
+});
+
+
+//visualizar todos clientes por nome
+app.get('/listaclientesnome',async(req, res)=>{
+    await cliente.findAll({
+        order:[['nome']]
+    }).then(function(clientes){
+        res.json({clientes})
+    });
+});
+
+//visualizar todos clientes por cidade
+app.get('/listaclientescidade',async(req, res)=>{
+    await cliente.findAll({
+        order:[['cidade']]
+    }).then(function(clientes){
+        res.json({clientes})
+    });
+});
+
+//visualizar todos clientes por uf
+app.get('/listaclientesuf',async(req, res)=>{
+    await cliente.findAll({
+        order:[['uf']]
+    }).then(function(clientes){
+        res.json({clientes})
+    });
+});
+
+//visualizar todos clientes por data de nascimento
+app.get('/listaclientesidade',async(req, res)=>{
+    await cliente.findAll({
+        order:[['nascimento']]
     }).then(function(clientes){
         res.json({clientes})
     });
@@ -170,10 +234,37 @@ app.get('/listaclientesantig',async(req, res)=>{
     });
 });
 
-//EX 3 - visualize todos os pedidos
+//EX 3 - visualize todos os pedidos por id
 app.get('/listapedidos',async(req, res)=>{
     await pedido.findAll({
-        raw: true
+        order:[['id']]
+    }).then(function(pedidos){
+        res.json({pedidos})
+    });
+});
+
+//visualizar todos pedidos por id do cliente
+app.get('/listapedidosclienteid',async(req, res)=>{
+    await pedido.findAll({
+        order:[['ClienteId']]
+    }).then(function(pedidos){
+        res.json({pedidos})
+    });
+});
+
+//visualizar todos pedidos por id do servico
+app.get('/listapedidosservicoid',async(req, res)=>{
+    await pedido.findAll({
+        order:[['ServicoId']]
+    }).then(function(pedidos){
+        res.json({pedidos})
+    });
+});
+
+//visualizar todos pedidos por data
+app.get('/listapedidosdata',async(req, res)=>{
+    await pedido.findAll({
+        order:[['data']]
     }).then(function(pedidos){
         res.json({pedidos})
     });
@@ -196,6 +287,14 @@ app.get('/numclientes',async(req, res)=>{
     });
 });
 
+//visualizar numero de servicos
+app.get('/numservicos',async(req, res)=>{
+    await servico.count('id')
+    .then(function(servicos){
+        res.json({servicos})
+    });
+});
+
 //EX 6 - visualizar numero de pedidos
 app.get('/numpedidos',async(req, res)=>{
     await pedido.count('id')
@@ -212,6 +311,15 @@ app.get('/clientegastou/:id',async(req, res)=>{
     await pedido.sum('valor', {where: { ClienteId: { [Op.eq]:req.params.id } } })
     .then(function(totalGastoCliente){
         res.json({totalGastoCliente})
+    });
+});
+
+
+//somar todos os valores gastos em um serviço específico
+app.get('/servicolucroubruto/:id',async(req, res)=>{
+    await pedido.sum('valor', {where: { ServicoId: { [Op.eq]:req.params.id } } })
+    .then(function(totalLucroBrutoServico){
+        res.json({totalLucroBrutoServico})
     });
 });
 //explicando a função acima, para fins didáticos de anotação!
@@ -334,7 +442,7 @@ app.get('/clientepedidos',async(req,res)=>{
 
 //EX 2 - consultar clientes e faça edição de um cliente pelo método put
 //
-//http://localhost:3000/listaclientes (linha 80 deste documento)
+//http://localhost:3000/listaclientes (linha 183 deste documento)
 //
 //e depois
 app.put('/editarcliente',async(req,res)=>{
@@ -358,11 +466,11 @@ app.put('/editarcliente',async(req,res)=>{
 
 //EX 3 - consultar pedidos e faça edição de um pedido pelo método put
 //
-//http://localhost:3000/listapedidos (linha 98 deste documento)
+//http://localhost:3000/listapedidos (linha 238 deste documento)
 //
 //e depois
 //
-//http://localhost:3000/editarpedido (linha 211 deste documento)
+//http://localhost:3000/editarpedido (linha 397 deste documento)
 //
 //ou utilizar o put abaixo com id específico
 app.put('/editapedido/:id', (req,res)=>{
@@ -409,7 +517,7 @@ app.delete('/apagarcliente/:id',(req,res)=>{
 });
 
 
-
+//excluir servico pelo id na rota
 app.delete('/apagarservico/:id',(req,res)=>{
     servico.destroy({
         where: {id:req.params.id}
@@ -427,7 +535,7 @@ app.delete('/apagarservico/:id',(req,res)=>{
 });
 
 
-
+//excluir pedido pelo id na rota
 app.delete('/apagarpedido/:id',(req,res)=>{
     pedido.destroy({
         where: {id:req.params.id}

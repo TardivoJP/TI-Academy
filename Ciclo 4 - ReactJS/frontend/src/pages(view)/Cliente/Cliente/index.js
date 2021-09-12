@@ -1,8 +1,14 @@
+import '../../../App.css';
 import axios from 'axios';
 import { useEffect, useState } from "react";
-import { Link } from 'react-router-dom';
+import { Link, Redirect } from 'react-router-dom';
 import { Alert, Container, Table } from 'reactstrap';
 import { api } from '../../../config';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faAddressCard, faPoll, faTrashAlt, faPencilAlt } from '@fortawesome/free-solid-svg-icons';
+import { library } from '@fortawesome/fontawesome-svg-core';
+
+library.add(faAddressCard, faPoll, faTrashAlt, faPencilAlt);
 
 export const Cliente = (props) => {
     console.log(props.match.params.id);
@@ -11,7 +17,10 @@ export const Cliente = (props) => {
 
     const [dataServicoPedidos, setDataServicoPedidos] = useState([]);
 
+    const [dataServicos, setDataServicos] = useState([]);
+
     const [nome, setNome] = useState('');
+    const [clienteGastou, setClienteGastou] = useState('');
 
     const [tabelaPedidosIsVisible, setTabelaPedidosIsVisible] = useState(true);
     const [msgNaoTemPedidosIsVisible, setMsgNaoTemPedidosIsVisible] = useState(true);
@@ -27,7 +36,6 @@ export const Cliente = (props) => {
         const getCliente = async () => {
             await axios.get(api + "/cliente/" + id)
                 .then((response) => {
-                    console.log(response.data.cliente);
                     setData(response.data.cliente);
                     setNome(response.data.cliente.nome);
                 })
@@ -37,6 +45,20 @@ export const Cliente = (props) => {
         }
         getCliente();
     }, [id]);
+
+    useEffect(() => {
+        const getClienteGastou = async () => {
+            await axios.get(api + "/clientegastou/" + id)
+                .then((response) => {
+                    setClienteGastou(response.data.totalGastoCliente);
+                })
+                .catch(() => {
+                    console.log("Erro: Não foi possível conectar a API.");
+                })
+        }
+        getClienteGastou();
+    }, [id]);
+
 
     useEffect(() => {
         const getClientePedidos = async () => {
@@ -62,87 +84,229 @@ export const Cliente = (props) => {
         getClientePedidos();
     }, [id]);
 
+
+    const getServicos = async () => {
+        await axios.get(api + "/listaservicos")
+            .then((response) => {
+                setDataServicos(response.data.servicos);
+            })
+            .catch(() => {
+                setStatus({
+                    type: 'error',
+                    message: 'Erro: Não foi possível conectar a API.'
+                })
+            });
+    }
+
+    useEffect(() => {
+        getServicos();
+    }, []);
+
+    var x = 0;
+    var z = 0;
+
+    var i = dataServicoPedidos.length;
+    var k = dataServicos.length;
+
+    console.log(dataServicoPedidos);
+    console.log(dataServicos);
+
+    if ((dataServicoPedidos[x] !== undefined) && (dataServicos[z] !== undefined)) {
+        while (x < i) {
+            while (z < k) {
+                if (dataServicoPedidos[x].ServicoId === dataServicos[z].id) {
+                    dataServicoPedidos[x].nomeServico = dataServicos[z].nome;
+                }
+                z++;
+            }
+
+            z = 0;
+            x++;
+        }
+    }
+
+
+    const [bitaoDeleteIsVisible, setBitaoDeleteIsVisible] = useState(true);
+    const [bitaoDeleteSimIsVisible, setBitaoDeleteSimIsVisible] = useState(true);
+    const [bitaoDeleteNaoIsVisible, setBitaoDeleteNaoIsVisible] = useState(true);
+    const [bitaoDeleteCtzaIsVisible, setBitaoDeleteCtzaIsVisible] = useState(true);
+
+    function mudarBitaoDeleteInvisivel() { setBitaoDeleteIsVisible(!bitaoDeleteIsVisible) }
+    function mudarBitaoDeleteSimInvisivel() { setBitaoDeleteSimIsVisible(!bitaoDeleteSimIsVisible) }
+    function mudarBitaoDeleteNaoInvisivel() { setBitaoDeleteNaoIsVisible(!bitaoDeleteNaoIsVisible) }
+    function mudarBitaoDeleteCtzaInvisivel() { setBitaoDeleteCtzaIsVisible(!bitaoDeleteCtzaIsVisible) }
+
+    function juntarFunctions() {
+        mudarBitaoDeleteInvisivel();
+        mudarBitaoDeleteSimInvisivel();
+        mudarBitaoDeleteNaoInvisivel();
+        mudarBitaoDeleteCtzaInvisivel();
+    }
+
+    const [voltarTabela, setVoltarTabela] = useState({
+        redirect: false
+    });
+
+    const apagarCliente = async (idCliente) => {
+        console.log(idCliente);
+
+        juntarFunctions();
+
+        const headers = {
+            'Content-Type': 'application/json'
+        }
+
+        await axios.delete(api + "/apagarcliente/" + idCliente, { headers })
+            .then((response) => {
+                console.log(response.data.error);
+                setVoltarTabela({ redirect: true })
+            }).catch(() => {
+                setStatus({
+                    type: 'error',
+                    message: 'Erro: Não foi possível acessar a API.'
+                })
+            })
+    }
+
+
     return (
         <div>
+            {voltarTabela.redirect ? (<Redirect push to="/visualizarcliente" />) : null}
             <Container>
                 <div className="d-flex flex-column justify-content-center align-items-center">
-                    <div className="w-100 m-auto mt-3 p-3 border rounded-pill d-flex justify-content-center align-items-center" style={{ background: 'rgba(16,100,199,0.33)' }}>
-                        <div className="m-auto p-2">
-                            <h1>Informações do cliente - ({nome}) - Id ({id})</h1>
-                        </div>
-                    </div>
-                    
-                    <div className="w-75 m-3 d-flex justify-content-center align-items-center text-center">
-                        <div className="w-100 p-5 border border-dark rounded" style={{ background: 'rgba(16,199,154,0.33)' }}>
-                            <dl className="row justify-content-center">
-                                <dt className="col-sm-3">Nome</dt>
-                                <dd className="col-md-3">{data.nome}</dd>
-                            </dl>
-                            <dl className="row justify-content-center">
-                                <dt className="col-sm-3">Endereço</dt>
-                                <dd className="col-md-3">{data.endereco}</dd>
-                            </dl>
-                            <dl className="row justify-content-center">
-                                <dt className="col-sm-3">Cidade</dt>
-                                <dd className="col-md-3">{data.cidade}</dd>
-                            </dl>
-                            <dl className="row justify-content-center">
-                                <dt className="col-sm-3">UF</dt>
-                                <dd className="col-md-3">{data.uf}</dd>
-                            </dl>
-                            <dl className="row justify-content-center">
-                                <dt className="col-sm-3">Nascimento </dt>
-                                <dd className="col-md-3">{data.nascimento}</dd>
-                            </dl>
-                            <dl className="row justify-content-center">
-                                <dt className="col-sm-3">Data de Criação</dt>
-                                <dd className="col-md-3">{data.createdAt}</dd>
-                            </dl>
+                    <div className="w-100 d-flex justify-content-center align-items-center" style={{ marginTop: '1.5%', marginBottom: '2%' }}>
+                        <div className="w-75 p-4 border d-flex justify-content-center align-items-center headerTabela cor-branca">
+                            <div className="w-100 d-flex p-2 justify-content-center align-items-center">
+                                <div>
+                                    <FontAwesomeIcon icon="address-card" className="fonte-responsiva-icon" style={{ color: 'var(--azul)' }} />
+                                </div>
+                                <div className="fonte-responsiva" style={{ marginLeft: '5%' }}>
+                                    {id} - {nome}
+                                </div>
+                            </div>
                         </div>
                     </div>
 
-                    <div className={tabelaPedidosIsVisible ? "p-5 d-flex flex-column"
-                        : "p-5 d-flex flex-column d-none"}>
+                    <div className="p-2 d-flex justify-content-center">
+                        <a href={"/editarcliente/" + id} className="d-flex text-center align-items-center btn btn-outline-warning btn-lg">
+                            <div>
+                                <FontAwesomeIcon icon="pencil-alt" className="fonte-responsiva-icon-pequena warning" />
+                            </div>
+                            <div className="p-2 fonte-responsiva-pequena">
+                                Editar este cliente
+                            </div>
+                        </a>
+
+                        <div className="d-flex justify-content-center align-items-center" style={{ marginLeft: '0.75rem' }}>
+                            <span onClick={juntarFunctions} className={bitaoDeleteIsVisible ? "d-flex text-center align-items-center btn btn-outline-danger btn-lg"
+                                : "d-flex text-center align-items-center btn btn-outline-danger btn-lg d-none"}>
+                                <div>
+                                    <FontAwesomeIcon icon="trash-alt" className="fonte-responsiva-icon-pequena danger" />
+                                </div>
+                                <div className="p-2 fonte-responsiva-pequena">
+                                    Excluir este cliente
+                                </div>
+                            </span>
+
+                            <span className={bitaoDeleteCtzaIsVisible ? "btn btn-outline-danger btn-lg disabled d-none fonte-responsiva-pequena"
+                                : "btn btn-outline-danger btn-lg disabled fonte-responsiva-pequena"}>Tem certeza?</span>
+
+                            <span onClick={() => apagarCliente(id)} className={bitaoDeleteSimIsVisible ? "btn btn-outline-danger btn-lg d-none fonte-responsiva-pequena"
+                                : "btn btn-outline-danger btn-lg fonte-responsiva-pequena"} style={{ marginLeft: '0.5rem' }}>Sim</span>
+
+                            <span onClick={juntarFunctions} className={bitaoDeleteNaoIsVisible ? "btn btn-outline-success btn-lg d-none fonte-responsiva-pequena"
+                                : "btn btn-outline-success btn-lg fonte-responsiva-pequena"} style={{ marginLeft: '0.5rem' }}>Não</span>
+                        </div>
+                    </div>
+
+                    <div className="w-75 m-3 d-flex">
+                        <div className="w-100 p-4 border d-flex headerTabela cor-branca">
+                            <div className="w-100 d-flex flex-column p-2 text-center fonte-responsiva-pequena">
+                                <div>
+                                    <span className="cor-texto-azul">Nome</span> - {data.nome}
+                                </div>
+                                <div>
+                                    <span className="cor-texto-azul">Endereço</span> - {data.endereco}
+                                </div>
+                                <div>
+                                    <span className="cor-texto-azul">Cidade</span> - {data.cidade}
+                                </div>
+                                <div>
+                                    <span className="cor-texto-azul">UF</span> - {data.uf}
+                                </div>
+                                <div>
+                                    <span className="cor-texto-azul">Nascimento</span> - {data.nascimento}
+                                </div>
+                                <div>
+                                    <span className="cor-texto-azul">Data de criação</span> - {data.createdAt}
+                                </div>
+                                <div>
+                                    <span className="cor-texto-azul">Total gasto</span> - R$ {clienteGastou}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div className={tabelaPedidosIsVisible ? "p-5 d-flex flex-column tabelaPedidoClientes"
+                        : "p-5 d-flex flex-column d-none tabelaPedidoClientes"}>
                         {status.type === 'error' ? <Alert color="danger">{status.message}</Alert> : ""}
-                        <div className="m-4 p-2 border border-dark rounded">
-                            <h1>Pedidos relacionados a este cliente</h1>
+                        <div className="w-100 p-4 border d-flex justify-content-center align-items-center headerTabela cor-branca text-center"
+                            style={{ marginBottom: '5%' }}>
+                            <div>
+                                <FontAwesomeIcon icon="poll" className="fonte-responsiva-icon" style={{ color: 'var(--azul)' }} />
+                            </div>
+                            <div className="fonte-responsiva" style={{ marginLeft: '5%' }}>
+                                Pedidos deste cliente
+                            </div>
                         </div>
                         <Table striped dark hover>
                             <thead>
-                                <tr>
+                                <tr className="text-center">
                                     <th>ID Pedido</th>
+                                    <th>ID Cliente</th>
                                     <th>ID Serviço</th>
                                     <th>Valor</th>
                                     <th>Data</th>
-                                    <th className="text-center">Ações</th>
+                                    <th>Ações</th>
                                 </tr>
                             </thead>
                             <tbody>
                                 {dataServicoPedidos.map(item => (
-                                    <tr key={item.id}>
+                                    <tr key={item.id} className="text-center">
                                         <td>{item.id}</td>
-                                        <td>{item.ServicoId}</td>
+                                        <td>{item.ClienteId} - {data.nome}</td>
+                                        <td>{item.ServicoId} - {item.nomeServico}</td>
                                         <td>{item.valor}</td>
                                         <td>{item.data}</td>
-                                        <td className="text-center">
+                                        <td >
                                             <Link to={"/pedido/" + item.id} className="btn btn-outline-primary btn-sm">Consultar</Link>
                                         </td>
                                     </tr>
                                 ))}
                             </tbody>
                         </Table>
-                    </div>
-
-                    <div className={msgNaoTemPedidosIsVisible ? "p-5 d-flex flex-column"
-                        : "p-5 d-flex flex-column d-none"}>
-                        <div className="m-auto p-2 border border-dark rounded">
-                            <h1>Não existem pedidos relacionados a este cliente!</h1>
+                        <div className="text-center fonte-responsiva-pequena">
+                            <span className="cor-texto-azul">Valor total</span> - R$ {clienteGastou}
                         </div>
                     </div>
 
-                    <div className="mt-2 d-flex justify-content-center">
+                    <div className={msgNaoTemPedidosIsVisible ? "p-5 d-flex flex-column tabelaPedidoClientes"
+                        : "p-5 d-flex flex-column d-none tabelaPedidoClientes"}>
+                        {status.type === 'error' ? <Alert color="danger">{status.message}</Alert> : ""}
+                        <div className="w-100 p-4 border d-flex justify-content-center align-items-center headerTabela cor-branca text-center"
+                            style={{ marginBottom: '5%' }}>
+                            <div>
+                                <FontAwesomeIcon icon="poll" className="fonte-responsiva-icon" style={{ color: 'var(--azul)' }} />
+                            </div>
+                            <div className="fonte-responsiva" style={{ marginLeft: '5%' }}>
+                                Esse cliente não tem pedidos!
+                            </div>
+                        </div>
+                    </div>
+
+                    <div className="mt-2 d-flex justify-content-center" style={{ marginBottom: '2%' }}>
                         <div className="p-2">
-                            <Link to="/visualizarcliente" className="btn btn-outline-primary btn-sm">Voltar</Link>
+                            <Link to="/visualizarcliente" className="btn btn-outline-primary btn-lg">Voltar</Link>
                         </div>
                     </div>
                 </div>
