@@ -44,7 +44,6 @@ export const VisualizarPedido = () => {
     const getPedidos = async () => {
         await axios.get(api + radio)
             .then((response) => {
-                console.log(response.data.pedidos);
                 setData(response.data.pedidos);
             })
             .catch(() => {
@@ -58,7 +57,6 @@ export const VisualizarPedido = () => {
     const getClientes = async () => {
         await axios.get(api + "/listaclientes")
             .then((response) => {
-                console.log(response.data.clientes);
                 setDataClientes(response.data.clientes);
             })
             .catch(() => {
@@ -72,7 +70,6 @@ export const VisualizarPedido = () => {
     const getServicos = async () => {
         await axios.get(api + "/listaservicos")
             .then((response) => {
-                console.log(response.data.servicos);
                 setDataServicos(response.data.servicos);
             })
             .catch(() => {
@@ -185,32 +182,32 @@ export const VisualizarPedido = () => {
 
                 <div className="p-2 d-flex justify-content-center" style={{ marginTop: '2.5%' }}>
                     <div className="p-2">
-                        <label class="btn btn-outline-primary disabled" for="option1">Ordenar por</label>
+                        <label className="btn btn-outline-primary disabled" htmlFor="option1">Ordenar por</label>
                     </div>
                     <div className="p-2">
-                        <input type="radio" className="btn-check" name="options" id="option1" autocomplete="off"
+                        <input type="radio" className="btn-check" name="options" id="option1" autoComplete="off"
                             checked={radio === "/listapedidos"} value="/listapedidos" onChange={(e) => { setRadio(e.target.value) }}></input>
-                        <label class="btn btn-outline-primary" for="option1">ID</label>
+                        <label className="btn btn-outline-primary" htmlFor="option1">ID</label>
                     </div>
                     <div className="p-2">
-                        <input type="radio" className="btn-check" name="options" id="option2" autocomplete="off"
+                        <input type="radio" className="btn-check" name="options" id="option2" autoComplete="off"
                             checked={radio === "/listapedidosclienteid"} value="/listapedidosclienteid" onChange={(e) => { setRadio(e.target.value) }}></input>
-                        <label class="btn btn-outline-primary" for="option2">ID Cliente</label>
+                        <label className="btn btn-outline-primary" htmlFor="option2">ID Cliente</label>
                     </div>
                     <div className="p-2">
-                        <input type="radio" className="btn-check" name="options" id="option3" autocomplete="off"
+                        <input type="radio" className="btn-check" name="options" id="option3" autoComplete="off"
                             checked={radio === "/listapedidosservicoid"} value="/listapedidosservicoid" onChange={(e) => { setRadio(e.target.value) }}></input>
-                        <label class="btn btn-outline-primary" for="option3">ID Serviço</label>
+                        <label className="btn btn-outline-primary" htmlFor="option3">ID Serviço</label>
                     </div>
                     <div className="p-2">
-                        <input type="radio" className="btn-check" name="options" id="option4" autocomplete="off"
+                        <input type="radio" className="btn-check" name="options" id="option4" autoComplete="off"
                             checked={radio === "/listapedidosvalor"} value="/listapedidosvalor" onChange={(e) => { setRadio(e.target.value) }}></input>
-                        <label class="btn btn-outline-primary" for="option4">Valor</label>
+                        <label className="btn btn-outline-primary" htmlFor="option4">Valor</label>
                     </div>
                     <div className="p-2">
-                        <input type="radio" className="btn-check" name="options" id="option5" autocomplete="off"
+                        <input type="radio" className="btn-check" name="options" id="option5" autoComplete="off"
                             checked={radio === "/listapedidosdata"} value="/listapedidosdata" onChange={(e) => { setRadio(e.target.value) }}></input>
-                        <label class="btn btn-outline-primary" for="option5">Data</label>
+                        <label className="btn btn-outline-primary" htmlFor="option5">Data</label>
                     </div>
                 </div>
 
