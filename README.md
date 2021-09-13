@@ -1,5 +1,8 @@
-# TI-Academy
-Código desenvolvido nas aulas + desafios
+# TI-Academy - Código desenvolvido nas aulas + desafios
+
+**IMPORTANTE!!**<br />
+**App Node + React desenvolvido nos ciclos 3 e 4**<br />
+**Acessível em: https://keen-euclid-bd3754.netlify.app**
 
 **Ciclo 1** - Contém **5** subpastas das aulas + desafios de HTML/CSS
 
